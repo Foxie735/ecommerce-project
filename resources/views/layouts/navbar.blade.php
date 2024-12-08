@@ -17,7 +17,7 @@
                 </li>
                 <li class="nav-item {{ $active ==='product' ? 'active' : ' '}}">
                     <a class="nav-link" href="#">All Product</a>
-                  </li>
+                </li>
                 <li class="nav-item dropdown {{ $active ==='kategori' ? 'active' : ' '}}">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                         Category
@@ -27,6 +27,12 @@
                         <a class="dropdown-item" href="#">Drink</a>
                         <a class="dropdown-item" href="#">Fruit & Vegges</a>
                     </div>
+                </li>
+                <li class="nav-item {{ $active ==='contact' ? 'active' : ' '}}">
+                    <a class="nav-link" href="{{ route('contact.index') }}">Contact</a>
+                </li>
+                <li class="nav-item {{ $active ==='about' ? 'active' : ' '}}">
+                    <a class="nav-link" href="{{ route('about.index') }}">About Us</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
