@@ -29,10 +29,10 @@
                     </div>
                 </li>
                 <li class="nav-item {{ $active ==='contact' ? 'active' : ' '}}">
-                    <a class="nav-link" href="{{ route('contact.index') }}">Contact</a>
+                    <a class="nav-link" href="{{ route('home.contact') }}">Contact</a>
                 </li>
                 <li class="nav-item {{ $active ==='about' ? 'active' : ' '}}">
-                    <a class="nav-link" href="{{ route('about.index') }}">About Us</a>
+                    <a class="nav-link" href="{{ route('home.about') }}">About Us</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
