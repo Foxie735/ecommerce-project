@@ -8,7 +8,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Edit Customer</h3>
                     <div class="card-tools">
-                        <a href="{{ route('category.index') }}" class="btn btn-danger btn-sm">
+                        <a href="{{ route('customer.index') }}" class="btn btn-danger btn-sm">
                             Close
                         </a>
                     </div>

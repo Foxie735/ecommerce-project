@@ -3,7 +3,7 @@
       <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
       <li class="nav-item">
-        <a href="#" class="nav-link">
+        <a href="{{ route('dashboard.index') }}" class="nav-link">
           <i class="nav-icon fas fa-th"></i>
           <p>
             Dashboard
@@ -43,7 +43,7 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('transaction.index') }}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>New Transaction</p>
             </a>
@@ -77,7 +77,7 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('report') }}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>Sale</p>
             </a>
@@ -85,7 +85,7 @@
         </ul>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link">
+        <a href="{{ route('profile.index') }}" class="nav-link">
           <i class="nav-icon fas fa-users"></i>
           <p>
             Profile
