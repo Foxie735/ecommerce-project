@@ -14,22 +14,43 @@
         padding-left: 15px; /* Add padding to the left */
         padding-right: 15px; /* Add padding to the right */
     }
+
+    #carousel img {
+        width: 100%;
+        height: 80vh;
+        object-fit: cover;
+        object-position: center;
+    }
 </style>
 @section('content')
     {{-- start carousel --}}
-    {{-- <div class="container">
+    <div class="container">
         <div class="row">
             <div class="col">
                 <div id="carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="{{ asset('assets/images/bg2.png') }}" alt="">
+                            <img src="{{ asset('assets/images/meals.jpg') }}" alt="meals">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('assets/images/drinks.jpg') }}" alt="drinks">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('assets/images/jus.jpg') }}" alt="juice">
                         </div>
                     </div>
+                    <a href="#carousel" class="carousel-control-prev" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a href="#carousel" class="carousel-control-next" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     {{-- end carousel --}}
 
     {{-- start product category --}}
