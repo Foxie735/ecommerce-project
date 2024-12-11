@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProdukController;
 use App\Http\Controllers\Admin\TransaksiController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomepageController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -41,3 +42,10 @@ Route::group(['prefix' => 'admin'], function() {
     // Proses Laporan
     Route::get('/processreport', [LaporanController::class, 'process'])->name('report.process');
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
