@@ -10,9 +10,10 @@
         object-fit: cover; 
         width: 100%;
     }
+    
     .container {
-        padding-left: 15px; /* Add padding to the left */
-        padding-right: 15px; /* Add padding to the right */
+        padding-left: 15px;
+        padding-right: 15px;
     }
 
     #carousel img {
