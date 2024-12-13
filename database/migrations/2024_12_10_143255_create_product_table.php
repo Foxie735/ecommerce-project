@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('name_product');
             $table->string('slug_product');
             $table->text('description_product');
+            $table->double('quantity', 12, 2)->default(0);
+            $table->string('per_unit');
+            $table->double('price', 12, 2)->default(0);
+            $table->enum('status', ['publish','notpublish'])->default('publish');
             $table->timestamps();
         });
     }

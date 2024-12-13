@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +25,7 @@
                 <a href="/" class="h1">Fushop</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Sign in to start your shopping</p>
+                <p class="login-box-msg">Sign in to start shopping</p>
 
                 <form action="{{ route('login') }}" method="post">
                     @csrf
@@ -82,3 +85,4 @@
     <script src="{{ asset('dist/js/adminlte.min.js?v=3.2.0') }}"></script>
 </body>
 </html>
+@endsection

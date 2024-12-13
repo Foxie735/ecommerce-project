@@ -27,6 +27,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
     // Route Kategori
     Route::resource('category', KategoriController::class);
+    Route::get('/find-category', [KategoriController::class, 'find'])->name('category.find');
     // Route Produk
     Route::resource('product', ProdukController::class);
     // Route Customer

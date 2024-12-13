@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProdukController extends Controller
 {
@@ -13,7 +16,8 @@ class ProdukController extends Controller
     public function index()
     {
         $title = "Product";
-        return view('product.index', compact('title'));
+        $items = Product::paginate(20);
+        return view('product.index', compact('title', 'items'));
     }
 
     /**
@@ -22,7 +26,8 @@ class ProdukController extends Controller
     public function create()
     {
         $title = "Product Page";
-        return view('product.create', compact('title'));
+        $itemcategory = Category::orderBy('name_category', 'asc')->get();
+        return view('product.create', compact('title', 'itemcategory'));
     }
 
     /**
@@ -30,7 +35,22 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'code_product' => 'required|unique:product',
+            'name_product' => 'required',
+            'slug_product' => 'required',
+            'description_product' => 'required',
+            'id_category' => 'required',
+            'quantity' => 'required|numeric',
+            'per_unit' => 'required',
+            'price' => 'required|numeric',
+        ]);
+
+        $input = $request->all();
+        $input['slug_product'] = Str::slug($request->slug_product);
+
+        Product::create($input);
+        return redirect()->route('product.index')->with('success', 'Product data saved successfully');
     }
 
     /**
@@ -48,7 +68,9 @@ class ProdukController extends Controller
     public function edit(string $id)
     {
         $title = "Product Page";
-        return view('product.edit', compact('title'));
+        $product = Product::findOrFail($id);
+        $itemsCategory = Category::all();
+        return view('product.edit', compact('title', 'product', 'itemsCategory'));
     }
 
     /**
@@ -56,7 +78,31 @@ class ProdukController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request, [
+            'code_product' => 'required',
+            'name_product' => 'required',
+            'slug_product' => 'required',
+            'description_product' => 'required',
+            'id_category' => 'required',
+            'quantity' => 'required|numeric',
+            'per_unit' => 'required',
+            'price' => 'required|numeric',
+        ]);
+
+        $itemproduct = Product::findOrFail($id);
+        $slug = Str::slug($request->slug_product);
+        $validationslug = Product::where('id_product', '!=', $id)
+                                    ->where('slug_product', $slug)
+                                    ->first();
+        if($validationslug) {
+            return back()->with('error', 'Slug already exist, try another slug');
+        } else {
+            $input = $request->all();
+            $input['slug_product'] = $slug;
+            $itemproduct->update($input);
+
+            return redirect()->route('product.index')->with('success', 'Product data updated successfully');
+        }
     }
 
     /**
