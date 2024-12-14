@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\ImageProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -17,6 +18,19 @@ class ProdukController extends Controller
     {
         $title = "Product";
         $items = Product::paginate(20);
+        $page = $request->page ?? 1;
+        $no = ($page -1) * 20;
+        return view('product.index', compact('title', 'items', 'no'));
+    }
+
+    public function find(Request $request)
+    {
+        $title = 'Find Product';
+        $find = $request->key;
+        $items = Product::where('code_product','LIKE','%'.$find.'%')
+                            ->orWhere('name_product','LIKE','%'.$find.'%')
+                            ->orWhere('status','LIKE','%'.$find.'%')
+                            ->paginate(20);
         return view('product.index', compact('title', 'items'));
     }
 
@@ -44,6 +58,7 @@ class ProdukController extends Controller
             'quantity' => 'required|numeric',
             'per_unit' => 'required',
             'price' => 'required|numeric',
+            'discount' => 'numeric'
         ]);
 
         $input = $request->all();
@@ -59,7 +74,9 @@ class ProdukController extends Controller
     public function show(string $id)
     {
         $title = "Product Detail";
-        return view('product.show', compact('title'));
+        $detailProduct = Product::findOrFail($id);
+        $imageProduct = ImageProduct::where('id_product', $id)->get();
+        return view('product.show', compact('title', 'detailProduct', 'imageProduct'));
     }
 
     /**
@@ -87,6 +104,7 @@ class ProdukController extends Controller
             'quantity' => 'required|numeric',
             'per_unit' => 'required',
             'price' => 'required|numeric',
+            'discount' => 'numeric'
         ]);
 
         $itemproduct = Product::findOrFail($id);
@@ -110,6 +128,57 @@ class ProdukController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        ImageProduct::where('id_product', $product->id_product)->delete();
+
+        $img_product = ImageProduct::where('id_product', $product->id_product)->get();
+
+        foreach($img_product as $img) {
+            if (file_exists($img->img_product)) {
+                unlink($img->img_product);
+            }
+        }
+
+        if ($product->delete()) {
+            return back()->with('success', 'Data deleted');
+        } else {
+            return back()->with('error', 'Data failed to delete, try again');
+        }
+    }
+
+    public function destroy_image ($id)
+    {
+        $imageproduct = ImageProduct::findOrFail($id);
+
+        if (file_exists($imageproduct->img_product)) {
+            unlink($imageproduct->img_product);
+        }
+
+        if ($imageproduct->delete()) {
+            return back()->with('success', 'Image deleted');
+        } else {
+            return back()->with('error', 'Image failed to delete, try again');
+        }
+    }
+
+    public function store_image (Request $request) 
+    {
+        $this->validate($request, [
+            'img_product' => 'required'
+        ]);
+        
+        $input = $request->all();
+
+        $img_product = null;
+        if ($request->hasFile('img_product')) {
+            $img = $request->file('img_product'); // Correct file input field
+            $img_product = time() . '_' . $img->getClientOriginalName();
+            $img->move('upload/image_product', $img_product);
+            $input['img_product'] = 'upload/image_product/' . $img_product;
+        }
+
+        ImageProduct::create($input);
+        return redirect()->back()->with('success', 'Image saved');
     }
 }

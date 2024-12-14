@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\ProdukController;
+use App\Http\Controllers\Admin\SlideshowController;
 use App\Http\Controllers\Admin\TransaksiController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomepageController;
@@ -30,6 +31,9 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/find-category', [KategoriController::class, 'find'])->name('category.find');
     // Route Produk
     Route::resource('product', ProdukController::class);
+    Route::get('/find-product', [ProdukController::class, 'find'])->name('product.find');
+    Route::post('/image-product', [ProdukController::class, 'store_image'])->name('product.store_image');
+    Route::delete('/image-product/{id}', [ProdukController::class, 'destroy_image'])->name('product.destroy_image');
     // Route Customer
     Route::resource('customer', CustomerController::class);
     // Route Transaksi
@@ -38,6 +42,8 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/profile', [UserController::class, 'index'])->name('profile.index');
     // Route Setting Profile
     Route::get('/setting', [UserController::class, 'setting'])->name('profile.setting');
+    // Route Slideshow
+    Route::resource('slideshow', SlideshowController::class);
     // Form Laporan
     Route::get('/report', [LaporanController::class, 'index'])->name('report');
     // Proses Laporan

@@ -30,7 +30,7 @@
                             </select>
                             @error('id_category')
                                 <div class="invalid-feedback">
-                                    {{ message }}
+                                    {{ $message }}
                                 </div>
                             @enderror
                         </div>
@@ -111,7 +111,16 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-
+                        </div>
+                        <div class="form-group">
+                            <label for="discount">Discount</label>
+                            <input type="text" name="discount" id="discount" class="form-control @error('discount') is-invalid
+                                @enderror" value="{{ old('discount') }}">
+                                @error('discount')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                         </div>
                         <div class="form-group">
                             <label for="status">Status</label>

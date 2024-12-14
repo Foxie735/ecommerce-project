@@ -12,10 +12,10 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="#">
+                    <form action="{{ route('product.find') }}" method="GET">
                         <div class="row">
                             <div class="col">
-                                <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Input Keyword">
+                                <input type="text" name="key" id="key" class="form-control" placeholder="Input Keyword">
                             </div>
                             <div class="col-auto">
                                 <button type="submit" class="btn btn-primary">

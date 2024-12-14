@@ -18,7 +18,9 @@ class KategoriController extends Controller
     {
         $title = "Product Category";
         $items = Category::paginate(1);
-        return view('category.index', compact('title', 'items'));
+        $page = $request->page ?? 1;
+        $no = ($page -1) * 1;
+        return view('category.index', compact('title', 'items', 'no'));
     }
 
     public function find(Request $request)
