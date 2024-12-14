@@ -4,7 +4,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2f4156; margin-bottom: 1rem;">
     <div class="container">
-        <a class="navbar-brand" href="#" style="font-size:25px; font-weight:500;">Fushop</a>
+        <a class="navbar-brand" href="#" style="font-size:25px; font-weight:500;">Fuushop</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
