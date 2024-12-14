@@ -10,7 +10,7 @@
         object-fit: cover; 
         width: 100%;
     }
-    
+
     .container {
         padding-left: 15px;
         padding-right: 15px;

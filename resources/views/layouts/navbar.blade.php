@@ -19,14 +19,7 @@
                     <a class="nav-link" href="#">All Product</a>
                 </li>
                 <li class="nav-item dropdown {{ $active ==='kategori' ? 'active' : ' '}}">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                        Category
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Meals</a>
-                        <a class="dropdown-item" href="#">Drink</a>
-                        <a class="dropdown-item" href="#">Fruit & Vegges</a>
-                    </div>
+                    <a class="nav-link" href="{{ route('home.category') }}">Category</a>
                 </li>
                 <li class="nav-item {{ $active ==='contact' ? 'active' : ' '}}">
                     <a class="nav-link" href="{{ route('home.contact') }}">Contact</a>
@@ -34,16 +27,21 @@
                 <li class="nav-item {{ $active ==='about' ? 'active' : ' '}}">
                     <a class="nav-link" href="{{ route('home.about') }}">About Us</a>
                 </li>
+                @if(Auth::check())
+                <li class="nav-item">
+                    <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Logout
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
+                @else
+                <li class="nav-item">
+                    <a href="{{ route('login') }}" class="nav-link">Login</a>
+                </li>
+                @endif
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
-                    <i class="bi bi-search"></i>
-                </button>
-                <button class="btn btn-outline-light my-2 my-sm-0 ml-2" type="Login">
-                    <i>Login</i>
-                </button>
-            </form>
         </div>
     </div>
 </nav>

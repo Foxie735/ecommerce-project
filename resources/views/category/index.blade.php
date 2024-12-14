@@ -13,10 +13,10 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="#">
+                    <form action="{{ route('category.find') }}" method="GET">
                         <div class="row">
                             <div class="col">
-                                <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Input Keyword">
+                                <input type="text" name="key" id="key" class="form-control" placeholder="Input Keyword">
                             </div>
                             <div class="col-auto">
                                 <button type="submit" class="btn btn-primary">
@@ -27,6 +27,16 @@
                     </form>
                 </div>
                 <div class="card-body">
+                    @if ($message = Session::get('error'))
+                        <div class="alert alert-error">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead>
@@ -36,87 +46,51 @@
                                     <th>Code</th>
                                     <th>Name</th>
                                     <th>Total Product</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $no = 1;
+                                @endphp
+                                @forelse($items as $item)
                                 <tr>
-                                    <td>1</td>
+                                    <td>{{ $no++ }}</td>
                                     <td>
-                                        <img src="{{ asset('assets/images/kimbab.jpg') }}" alt="Product Image" width="150px">
-                                        <div class="row mt-2">
-                                            <div class="col">
-                                                <input type="file" name="image" id="image">
-                                            </div>
-                                            <div class="col-auto">
-                                                <button class="btn btn-sm btn-primary">
-                                                    Upload
-                                                </button>
-                                            </div>
-                                        </div>
+                                        <img src="{{ asset($item->img_category) }}" alt="Product Image" width="150px">
+                                        
                                     </td>
-                                    <td>K1</td>
-                                    <td>Kimbab</td>
-                                    <td>50</td>
+                                    <td>{{ $item->code_category }}</td>
+                                    <td>{{ $item->name_category }}</td>
+                                    <td>{{ count($item->Product) }}</td>
+                                    <td>{{ $item->status }}</td>
                                     <td>
-                                        <a href="{{ route('category.edit', 2) }}" class="btn btn-sm btn-primary mr-2 mb-2">
+                                        <a href="{{ route('category.edit', $item->id_category) }}" class="btn btn-sm btn-primary mr-2 mb-2">
                                             Edit
                                         </a>
-                                        <button class="btn btn-sm btn-danger mb-2">Delete</button>
+                                        <form action="{{ route('category.destroy', $item->id_category) }}" method="POST" style="display: inline">
+                                            @csrf
+                                            @method('delete')
+
+                                            <button style="submit" class="btn btn-sm btn-danger mb-2" onclick="return confirm('Are you sure to remove this data?')">
+                                                Delete
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>
-                                        <img src="{{ asset('assets/images/kimbab.jpg') }}" alt="Product Image" width="150px">
-                                        <div class="row mt-2">
-                                            <div class="col">
-                                                <input type="file" name="image" id="image">
-                                            </div>
-                                            <div class="col-auto">
-                                                <button class="btn btn-sm btn-primary">
-                                                    Upload
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>K1</td>
-                                    <td>Kimbab</td>
-                                    <td>50</td>
-                                    <td>
-                                        <a href="{{ route('category.edit', 2) }}" class="btn btn-sm btn-primary mr-2 mb-2">
-                                            Edit
-                                        </a>
-                                        <button class="btn btn-sm btn-danger mb-2">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>
-                                        <img src="{{ asset('assets/images/kimbab.jpg') }}" alt="Product Image" width="150px">
-                                        <div class="row mt-2">
-                                            <div class="col">
-                                                <input type="file" name="image" id="image">
-                                            </div>
-                                            <div class="col-auto">
-                                                <button class="btn btn-sm btn-primary">
-                                                    Upload
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>K1</td>
-                                    <td>Kimbab</td>
-                                    <td>50</td>
-                                    <td>
-                                        <a href="{{ route('category.edit', 2) }}" class="btn btn-sm btn-primary mr-2 mb-2">
-                                            Edit
-                                        </a>
-                                        <button class="btn btn-sm btn-danger mb-2">Delete</button>
-                                    </td>
-                                </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="7">
+                                            <div class="alert alert-warning">Data not found</div>
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
+                        <div class="float-right">
+                            {{ $items->links() }}
+                        </div>
                     </div>
                 </div>
             </div>

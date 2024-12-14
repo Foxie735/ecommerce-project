@@ -14,21 +14,77 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('category.update', 1) }}">
+                    <form action="{{ route('category.update', $category->id_category) }}" method="POST" enctype="multipart/form-data">
+                        @method('put')
+                        @csrf
                         <div class="form-group">
-                            <label for="nama_kategori">Category Name</label>
-                            <input type="text" name="nama_kategori" id="nama_kategori" class="form-control">
+                            <label for="code_category">Code Category</label>
+                            <input type="text" name="code_category" id="code_category" class="form-control
+                            @error('code_category') is-invalid
+                            @enderror" value="{{ old('code_category', $category->code_category) }}">
+                            @error('code_category')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                         <div class="form-group">
-                            <label for="slug_kategori">Category Slug</label>
-                            <input type="text" name="slug_kategori" id="slug_kategori" class="form-control">
+                            <label for="name_category">Category Name</label>
+                            <input type="text" name="name_category" id="name_category" class="form-control
+                            @error('name_category') is-invalid
+                            @enderror" value="{{ old('name_category', $category->name_category) }}">
+                            @error('name_category')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                         <div class="form-group">
-                            <label for="deskripsi">Description</label>
-                            <textarea name="deskripsi" id="deskripsi" cols="30" rows="5" class="form-control"></textarea>
+                            <label for="slug_category">Category Slug</label>
+                            <input type="text" name="slug_category" id="slug_kategori" class="form-control
+                            @error('slug_category') is-invalid
+                            @enderror" value="{{ old('slug_category', $category->slug_category) }}">
+                            @error('slug_category')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <label for="img_category">Image Category</label>
+                            <input type="file" name="img_category" id="img_category" class="form-control">
+                            <br>
+                            <br>
+                            <img src="{{ asset($category->img_category) }}" alt="" width="100px;">
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select name="status" id="status" class="form-control
+                            @error('status') is-invalid
+                            @enderror">
+                                @error('status')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                                <option value="publish" {{ old('status', $category->status) === 'publish' ? 'selected' : '' }}>Publish</option>
+                                <option value="notpublish" {{ old('status', $category->status) === 'notpublish' ? 'selected' : '' }}>Not Publish</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="description_category">Description</label>
+                            <textarea name="description_category" id="description_category" cols="30" rows="5" class="form-control @error('description_category') is-invalid
+                            @enderror" value="{{ old('description_category') }}">
+                                {{ old('description_category', $category->description_category) }}
+                            </textarea>
+                            @error('description_category')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Update</button>
                             <button type="reset" class="btn btn-warning">Reset</button>
                         </div>
                     </form>

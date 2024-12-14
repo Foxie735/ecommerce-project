@@ -26,47 +26,67 @@
                     </form>
                 </div>
                 <div class="card-body">
+                    @if ($message = Session::get('error'))
+                        <div class="alert alert-error">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th width="50px">No</th>
-                                    <th>Image</th>
                                     <th>Code</th>
                                     <th>Name</th>
-                                    <th>Total Product</th>
+                                    <th>Total</th>
+                                    <th>Price</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $no = 1;
+                                @endphp
+                                @forelse ($items as $item)
                                 <tr>
-                                    <td>1</td>
+                                    <td>{{ $no++ }}</td>
+                                    <td>{{ $item->code_product }}</td>
+                                    <td>{{ $item->name_product }}</td>
+                                    <td>{{ $item->quantity }} {{ $item->per_unit }}</td>
+                                    <td>{{ number_format($item->price, 2) }}</td>
+                                    <td>{{ $item->status }}</td>
                                     <td>
-                                        <img src="{{ asset('assets/images/kimbab.jpg') }}" alt="Product Image" width="150px">
-                                        <div class="row mt-2">
-                                            <div class="col">
-                                                <input type="file" name="image" id="image">
-                                            </div>
-                                            <div class="col-auto">
-                                                <button class="btn btn-sm btn-primary">
-                                                    Upload
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>K1</td>
-                                    <td>Kimbab</td>
-                                    <td>50</td>
-                                    <td>
-                                        <a href="{{ route('product.show', 2) }}" class="btn btn-sm btn-primary mr-2 mb-2">
+                                        <a href="{{ route('product.show', $item->id_product) }}" class="btn btn-sm btn-primary mr-2 mb-2">
                                             Detail
                                         </a>
-                                        <a href="{{ route('product.edit', 2) }}" class="btn btn-sm btn-primary mr-2 mb-2">
+                                        <a href="{{ route('product.edit', $item->id_product) }}" class="btn btn-sm btn-primary mr-2 mb-2">
                                             Edit
                                         </a>
-                                        <button class="btn btn-sm btn-danger mb-2">Delete</button>
+                                        <form action="{{ route('product.destroy', $item->id_product) }}" method="POST" style="display: inline">
+                                            @csrf
+                                            @method('delete')
+
+                                            <button style="submit" class="btn btn-sm btn-danger mb-2" onclick="return confirm('Are you sure to remove this data?')">
+                                                Delete
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
+                                @empty
+                                <tr>
+                                    <td colspan="8">
+                                        <div class="alert alert-warning">
+                                            Data not found
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
