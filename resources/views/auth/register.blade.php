@@ -1,9 +1,38 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card card-outline card-primary">
+
+<style>
+    .bg-img {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+
+    .btn {
+        background-color: #2f4156;
+        color: white;
+    }
+
+    .btn:hover {
+        background-color: #1b2530;
+        color: #f7f5f5;
+    }
+
+    .card{
+        box-shadow: 0px 3px 10px black;
+    }
+</style>
+
+<img class="bg-img" src="{{ asset('assets/images/bg1.jpg') }}" alt="bg image">
+
+<div class="card">
     <div class="card-header text-center">
-        <a href="/" class="h1">Fushop</a>
+        <a href="/" class="h1">Fuushop</a>
     </div>
     <div class="card-body">
         <p class="login-box-msg">Register a new user</p>
@@ -60,7 +89,9 @@
                 <!-- /.col -->
             </div>
         </form>
-        <a href="/login" class="text-center">I already have an account</a>
+        <div class="text-center mt-2">
+            <a href="/login" class="text-center">I already have an account</a>
+        </div>
     </div>
     <!-- /.form-box -->
 </div>

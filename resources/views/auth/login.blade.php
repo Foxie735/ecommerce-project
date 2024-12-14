@@ -17,12 +17,42 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css?v=3.2.0') }}">
 </head>
+
+<style>
+    .bg-img {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+
+
+    .sign {
+        background-color: #2f4156;
+        color: white;
+    }
+
+    .sign:hover {
+        background-color: #1b2530;
+        color: #f7f5f5;
+    }
+
+    .card {
+        box-shadow: 0px 3px 10px black;
+    }
+</style>
+
 <body class="hold-transition login-page">
+    <img class="bg-img" src="{{ asset('assets/images/bg1.jpg') }}" alt="bg image">
+
     <div class="login-box">
         <!-- /.login-logo -->
-        <div class="card card-outline card-primary">
+        <div class="card">
             <div class="card-header text-center">
-                <a href="/" class="h1">Fushop</a>
+                <a href="/" class="h1">Fuushop</a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start shopping</p>
@@ -55,7 +85,7 @@
                     @enderror
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <button type="submit" class="btn btn-block sign">Sign In</button>
                         </div>
                         <!-- /.col -->
                         <div class="col-12 mt-3 mb-2">
@@ -67,7 +97,7 @@
                     </div>
                 </form>
                 <!-- /.social-auth-links -->
-                <p class="mb-0">
+                <p class="mb-0 text-center">
                     <a href="/register" class="text-center">Dont have an account?</a>
                 </p>
             </div>
