@@ -30,15 +30,27 @@
             <div class="col">
                 <div id="carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{ asset('assets/images/meals.jpg') }}" alt="meals">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('assets/images/drinks.jpg') }}" alt="drinks">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('assets/images/jus.jpg') }}" alt="juice">
-                        </div>
+                        @foreach($itemslide as $index => $slide)
+                            @if($index == 0)
+                            <div class="carousel-item active">
+                                <img src="{{ asset($slide->img_slideshow) }}" alt="{{ $slide->caption_title }}">
+                                <div class="carousel-caption d-none d-md-block bg-secondary rounded-pill">
+                                    <h3 class="text-shadow text-bold">
+                                        {{ $slide->caption_title }}
+                                    </h3>
+                                </div>
+                            </div>
+                            @else
+                            <div class="carousel-item">
+                                <img src="{{ asset($slide->img_slideshow) }}" alt="{{ $slide->caption_title }}">
+                                <div class="carousel-caption d-none d-md-block bg-secondary rounded-pill">
+                                    <h3 class="text-shadow text-bold">
+                                        {{ $slide->caption_title }}
+                                    </h3>
+                                </div>
+                            </div>
+                            @endif
+                        @endforeach
                     </div>
                     <a href="#carousel" class="carousel-control-prev" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -63,45 +75,27 @@
                 <div class="category-divider"></div>
             </div>
             <div class="m-auto row">
-                {{-- First Category --}}
+                @foreach($itemcategory as $category)
                 <div class="col-4">
                     <div class="card mb-4 shadow-sm">
                         <a href="#">
-                            <img src="{{ asset('assets/images/meals.jpg') }}" alt="Meals" class="card-img-top fixed-img">
+                            <img src="{{ asset($category->img_category) }}" alt="Meals" class="card-img-top fixed-img">
                         </a>
                         <div class="card-body">
-                            <a href="" class="text-decoration-none">
-                                <p class="card-text">Meals</p>
-                            </a>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="card-text">{{ $category->name_category }}</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="#" class="btn btn-info">
+                                        See Category
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                {{-- Second Category --}}
-                <div class="col-4">
-                    <div class="card mb-4 shadow-sm">
-                        <a href="#">
-                            <img src="{{ asset('assets/images/drinks.jpg') }}" alt="Drinks" class="card-img-top fixed-img">
-                        </a>
-                        <div class="card-body">
-                            <a href="" class="text-decoration-none">
-                                <p class="card-text">Drinks</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                {{-- Third Category --}}
-                <div class="col-4">
-                    <div class="card mb-4 shadow-sm">
-                        <a href="#">
-                            <img src="{{ asset('assets/images/fruitsveges.jpg') }}" alt="Fruits & Vegges" class="card-img-top fixed-img">
-                        </a>
-                        <div class="card-body">
-                            <a href="" class="text-decoration-none">
-                                <p class="card-text">Fruits & Vegges</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -115,91 +109,49 @@
                 <h2 class="text-center">Promo</h2>
                 <div class="category-divider"></div>
             </div>
-        {{-- first product --}}
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <a href="#">
-                        <img src="{{ asset('assets/images/blueberry.jpg') }}" alt="" class="card-img-top fixed-img">
-                    </a>
-                    <div class="card-body">
-                        <a href="#" class="text-decoration-none">
-                            <p class="card-text">
-                                Blueberry
-                            </p>
+            @foreach($productpromo as $promo)
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        @if($promo->ImageProduct->isNotEmpty())
+                        @foreach($promo->ImageProduct->take(1) as $image)
+                        <a href="#">
+                            <img src="{{ asset($image->img_product) }}" alt="" class="card-img-top fixed-img">
                         </a>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <button class="btn btn-light">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-                            <div class="col-auto">
-                                <p>
-                                    <del>Rp.15.000,00</del>
-                                    <br>
-                                    Rp.10.000,00
+                        @endforeach
+                        @else
+                        <a href="#">
+                            <img src="{{ asset('default-image.jpg') }}" alt="No Image" class="card-img-top fixed-img">
+                        </a>
+                        @endif
+                        <div class="card-body">
+                            <a href="#" class="text-decoration-none">
+                                <p class="card-text">
+                                    {{ $promo->name_product }}
                                 </p>
+                            </a>
+                            <div class="row mt-4">
+                                <div class="col">
+                                    <a href="#" class="btn btn-info">
+                                        Detail
+                                    </a>
+                                </div>
+                                <div class="col-auto">
+                                    <p>
+                                        <del>Rp. {{ number_format($promo->price) }}</del>
+                                        <br>
+                                        @php
+                                        $realprice = $promo->price;
+                                        $discount = (100/100 - $promo->discount / 100) * $realprice;
+                                        @endphp
+                                        Rp. {{ number_format($discount, 2) }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <a href="#">
-                        <img src="{{ asset('assets/images/chickensalad.jpg') }}" alt="" class="card-img-top fixed-img">
-                    </a>
-                    <div class="card-body">
-                        <a href="#" class="text-decoration-none">
-                            <p class="card-text">
-                                Chicken Salad
-                            </p>
-                        </a>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <button class="btn btn-light">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-                            <div class="col-auto">
-                                <p>
-                                    <del>Rp.30.000,00</del>
-                                    <br>
-                                    Rp.23.000,00
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <a href="#">
-                        <img src="{{ asset('assets/images/drink5.jpg') }}" alt="" class="card-img-top fixed-img">
-                    </a>
-                    <div class="card-body">
-                        <a href="#" class="text-decoration-none">
-                            <p class="card-text">
-                                Juice
-                            </p>
-                        </a>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <button class="btn btn-light">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-                            <div class="col-auto">
-                                <p>
-                                    <del>Rp.12.000,00</del>
-                                    <br>
-                                    Rp.8.000,00
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+            @endforeach
         </div>
     </div>
     {{-- end promo product --}}
@@ -211,85 +163,54 @@
                 <h2 class="text-center">New Product</h2>
                 <div class="category-divider"></div>
             </div>
-        {{-- first product --}}
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <a href="#">
-                        <img src="{{ asset('assets/images/pizza1.jpg') }}" alt="" class="card-img-top fixed-img">
-                    </a>
-                    <div class="card-body">
-                        <a href="#" class="text-decoration-none">
-                            <p class="card-text">
-                                Pizza
-                            </p>
+            @foreach($itemproduct as $product)
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        @if($product->ImageProduct->isNotEmpty())
+                            @foreach($product->ImageProduct->take(1) as $image)
+                                <a href="#">
+                                    <img src="{{ asset($image->img_product) }}" alt="" class="card-img-top fixed-img">
+                                </a>
+                            @endforeach
+                        @else
+                        <a href="#">
+                            <img src="{{ asset('default-image.jpg') }}" alt="No Image" class="card-img-top fixed-img">
                         </a>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <button class="btn btn-light">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-                            <div class="col-auto">
-                                <p>
-                                    Rp.100.000,00
+                        @endif
+                        <div class="card-body">
+                            <a href="#" class="text-decoration-none">
+                                <p class="card-text">
+                                    {{ $product->name_product }}
                                 </p>
+                            </a>
+                            <div class="row mt-4">
+                                <div class="col">
+                                    <a href="#" class="btn btn-info">
+                                        Detail
+                                    </a>
+                                </div>
+                                <div class="col-auto">
+                                    @if(empty($product->discount))
+                                    <p>
+                                        Rp. {{ number_format($product->price, 2) }}
+                                    </p>
+
+                                    @else
+                                    <p>
+                                        @php
+                                        $realprice = $promo->price;
+                                        $discount = (100/100 - $promo->discount / 100) * $realprice;
+                                        @endphp
+                                        Rp. {{ number_format($discount, 2) }}
+                                    </p>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <a href="#">
-                        <img src="{{ asset('assets/images/dumpling.jpg') }}" alt="" class="card-img-top fixed-img">
-                    </a>
-                    <div class="card-body">
-                        <a href="#" class="text-decoration-none">
-                            <p class="card-text">
-                                Dumpling
-                            </p>
-                        </a>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <button class="btn btn-light">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-                            <div class="col-auto">
-                                <p>
-                                    Rp.20.000,00
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <a href="#">
-                        <img src="{{ asset('assets/images/drink6.jpg') }}" alt="" class="card-img-top fixed-img">
-                    </a>
-                    <div class="card-body">
-                        <a href="#" class="text-decoration-none">
-                            <p class="card-text">
-                                Tea
-                            </p>
-                        </a>
-                        <div class="row mt-4">
-                            <div class="col">
-                                <button class="btn btn-light">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-                            <div class="col-auto">
-                                <p>
-                                    Rp.8.000,00
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+            @endforeach
         </div>
     </div>
     {{-- end new product --}}

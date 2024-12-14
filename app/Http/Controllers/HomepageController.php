@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Slideshow;
 use Illuminate\Http\Request;
 
 class HomepageController extends Controller
@@ -10,7 +13,16 @@ class HomepageController extends Controller
     {
         $title = "Homepage";
         $active = "home";
-        return view('homepage.index', compact('title', 'active'));
+        $itemproduct = Product::orderBy('created_at', 'desc')->where('status', 'publish')->limit(6)->get();
+        $productpromo = Product::with('ImageProduct')
+                        ->where('status', 'publish')
+                        ->whereNotNull('discount')
+                        ->orderBy('created_at', 'desc')
+                        ->limit(6)
+                        ->get();
+        $itemcategory = Category::orderBy('name_category', 'asc')->limit(6)->get();
+        $itemslide = Slideshow::get();
+        return view('homepage.index', compact('title', 'active', 'itemproduct', 'productpromo', 'itemcategory', 'itemslide'));
     }
     public function about() 
     {
