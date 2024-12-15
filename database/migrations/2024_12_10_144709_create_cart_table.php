@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('no_invoice');
             $table->enum('status_cart', ['process', 'active', 'inactive']);
             $table->enum('payment_status', ['paid', 'notpaid']);
+            $table->enum('delivery_status', ['done', 'notdone']);
             $table->string('no_receipt')->nullable();
             $table->string('expedition')->nullable();
             $table->double('subtotal')->default(0);

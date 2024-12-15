@@ -9,7 +9,9 @@ use App\Http\Controllers\Admin\SlideshowController;
 use App\Http\Controllers\Admin\TransaksiController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CartDetailController;
 use App\Http\Controllers\HomepageController;
+use App\Models\CartDetail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,9 +25,11 @@ Route::get('/category', [HomepageController::class, 'category'])->name('home.cat
 Route::get('/productdetail/{slug}', [HomepageController::class, 'productdetail'])->name('home.productdetail');
 Route::get('/category/{slug}', [HomepageController::class, 'categorybyslug'])->name('home.categorybyslug');
 
-Route::resource('cart', CartController::class);
-
-Route::patch('empty/{id}', [CartController::class, 'empty']);
+Route::middleware(['auth', 'role:member'])->group(function () {
+    Route::resource('cart', CartController::class);
+    Route::patch('empty/{id}', [CartController::class, 'empty']);
+    Route::resource('cartdetail', CartDetailController::class);
+});
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::group(['prefix' => 'admin'], function () {

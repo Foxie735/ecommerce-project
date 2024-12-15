@@ -83,7 +83,7 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <form action="" method="POST">
+                            <form action="{{ route('cartdetail.store') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="id_product" value="{{ $itemproduct->id_product }}">
                                 <button class="btn btn-block btn-primary" type="submit">

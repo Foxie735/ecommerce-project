@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\CartDetail;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 use function Laravel\Prompts\alert;
@@ -79,8 +81,22 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function empty($id)
     {
-        //
+        $itemcart = Cart::findOrFail($id);
+
+        $itemcartdetail = CartDetail::where('id_cart', $id)->get();
+
+        foreach($itemcartdetail as $cartdetail) {
+            $itemdetail = CartDetail::where('id_product', $cartdetail->id_product)->first();
+            $itemproduct = Product::where('id_product', $cartdetail->id_product)->first();
+            Product::where('id_product', $itemproduct->id_product)->update([
+                'quantity' => $itemproduct->quantity + $itemdetail->quantity,
+            ]);
+        }
+
+        $itemcart->CartDetail()->delete();
+        $itemcart->updatetotal($itemcart, '-', $itemcart->subtotal);
+        return back()->with('success', 'Cart successfully emptied');
     }
 }
