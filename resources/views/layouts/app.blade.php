@@ -14,12 +14,12 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css?v=3.2.0') }}">
 </head>
-<body class="hold-transition login-page">
-    <div class="login-box">
+<!-- <body class="hold-transition login-page">
+    <div class="login-box"> -->
         <!-- /.login-logo -->
         @yield('content')
         <!-- /.card -->
-    </div>
+    <!-- </div> -->
     <!-- /.login-box -->
 
     <!-- jQuery -->
@@ -28,5 +28,5 @@
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('dist/js/adminlte.min.js?v=3.2.0') }}"></script>
-</body>
+<!-- </body> -->
 </html>

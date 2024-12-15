@@ -1,4 +1,4 @@
-@extends('layouts.app')
+<!-- @extends('layouts.app') -->
 
 @section('content')
 <!DOCTYPE html>
@@ -29,7 +29,6 @@
         z-index: -1;
     }
 
-
     .sign {
         background-color: #2f4156;
         color: white;
@@ -45,17 +44,30 @@
     }
 </style>
 
-<body class="hold-transition login-page">
+<body>
     <img class="bg-img" src="{{ asset('assets/images/bg1.jpg') }}" alt="bg image">
-
-    <div class="login-box">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2f4156;">
+        <div class="container">
+            <a class="navbar-brand fw-semibold" href="#" style="font-size:25px;">
+                <img class="text-align" src="{{ asset('assets/images/logo-fs.jpg') }}" alt="logo fs" width="30" height="24" class="d-inline-block align-text-top">
+                Fuushop
+            </a> 
+            <div class="navbar-nav nav-underline">
+                <div class="d-flex">
+                    <a class="nav-link active p-2" aria-current="page" href="/login">Login</a>
+                    <a class="nav-link p-2 ms-2" href="/register">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container d-flex justify-content-center" style="min-height: 90vh">
         <!-- /.login-logo -->
-        <div class="card">
+        <div class="card m-auto" style="width: 360px;">
             <div class="card-header text-center">
                 <a href="/" class="h1">Fuushop</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Sign in to start shopping</p>
+                <p class="text-center">Sign in to start shopping</p>
 
                 <form action="{{ route('login') }}" method="post">
                     @csrf
