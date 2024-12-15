@@ -58,7 +58,7 @@
                     </a>
                     <a href="#carousel" class="carousel-control-next" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
+                        <span class="sr-only">Next</span>
                     </a>
                 </div>
             </div>
@@ -114,7 +114,7 @@
                     <div class="card mb-4 shadow-sm">
                         @if($promo->ImageProduct->isNotEmpty())
                         @foreach($promo->ImageProduct->take(1) as $image)
-                        <a href="#">
+                        <a href="{{ route('home.productdetail', $promo->slug_product) }}">
                             <img src="{{ asset($image->img_product) }}" alt="" class="card-img-top fixed-img">
                         </a>
                         @endforeach
@@ -131,7 +131,7 @@
                             </a>
                             <div class="row mt-4">
                                 <div class="col">
-                                    <a href="#" class="btn btn-info">
+                                    <a href="{{ route('home.productdetail', $promo->slug_product) }}" class="btn btn-info">
                                         Detail
                                     </a>
                                 </div>
@@ -168,7 +168,7 @@
                     <div class="card mb-4 shadow-sm">
                         @if($product->ImageProduct->isNotEmpty())
                             @foreach($product->ImageProduct->take(1) as $image)
-                                <a href="#">
+                                <a href="{{ route('home.productdetail', $promo->slug_product) }}">
                                     <img src="{{ asset($image->img_product) }}" alt="" class="card-img-top fixed-img">
                                 </a>
                             @endforeach
@@ -185,7 +185,7 @@
                             </a>
                             <div class="row mt-4">
                                 <div class="col">
-                                    <a href="#" class="btn btn-info">
+                                    <a href="{{ route('home.productdetail', $promo->slug_product) }}" class="btn btn-info">
                                         Detail
                                     </a>
                                 </div>

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slideshow;
-use Illuminate\Http\Request;
 
 class HomepageController extends Controller
 {
@@ -38,8 +37,27 @@ class HomepageController extends Controller
     }
     public function category() 
     {
-        $title = "product Category";
+        $title = "Product Category";
         $active = "category";
-        return view('homepage.category', compact('title', 'active'));
+        $itemcategory = Category::orderBy('name_category', 'asc')->get();
+        $itemproduct = Product::orderBy('created_at', 'desc')->limit(6)->get();
+        return view('homepage.category', compact('title', 'active', 'itemcategory', 'itemproduct'));
+    }
+
+    public function productdetail($slug)
+    {
+        $itemproduct = Product::
+                            where('slug_product', $slug)
+                            ->where('status', 'publish')
+                            ->first();
+
+        if ($itemproduct) {
+            $title = $itemproduct->name_product;
+            $active = 'home';
+            $itemproduct = $itemproduct;
+            return view('homepage.productdetail', compact('title', 'active', 'itemproduct'));
+        } else {
+            return abort(404);
+        }
     }
 }

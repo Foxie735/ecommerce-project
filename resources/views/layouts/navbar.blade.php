@@ -15,9 +15,6 @@
                 <li class="nav-item {{ $active ==='home' ? 'active' : ' '}}">
                     <a class="nav-link" href="{{ route('home.index') }}">Home<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item {{ $active ==='product' ? 'active' : ' '}}">
-                    <a class="nav-link" href="#">All Product</a>
-                </li>
                 <li class="nav-item dropdown {{ $active ==='kategori' ? 'active' : ' '}}">
                     <a class="nav-link" href="{{ route('home.category') }}">Category</a>
                 </li>
