@@ -170,4 +170,23 @@ class CartDetailController extends Controller
             return back()->with('error', 'Item failed to delete');
         }
     }
+
+    public function destroy($id)
+    {
+        $itemdetail = CartDetail::findOrFail($id);
+
+        $itemproduct = Product::findOrFail($itemdetail->id_product);
+
+        Product::where('id_product', $itemdetail->id_product)->update([
+            'quantity' => $itemproduct->quantity + $itemdetail->quantity,
+        ]);
+
+        $itemdetail->cart->updatetotal($itemdetail->cart, '-', $itemdetail->subtotal);
+
+        if ($itemdetail->delete()) {
+            return back()->with('success', 'Item deleted');
+        } else {
+            return back()->with('error', 'Item failed to delete');
+        }
+    }
 }

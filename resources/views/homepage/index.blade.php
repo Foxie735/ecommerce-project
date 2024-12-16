@@ -168,7 +168,7 @@
                     <div class="card mb-4 shadow-sm">
                         @if($product->ImageProduct->isNotEmpty())
                             @foreach($product->ImageProduct->take(1) as $image)
-                                <a href="{{ route('home.productdetail', $promo->slug_product) }}">
+                                <a href="{{ route('home.productdetail', $product->slug_product) }}">
                                     <img src="{{ asset($image->img_product) }}" alt="" class="card-img-top fixed-img">
                                 </a>
                             @endforeach
@@ -185,7 +185,7 @@
                             </a>
                             <div class="row mt-4">
                                 <div class="col">
-                                    <a href="{{ route('home.productdetail', $promo->slug_product) }}" class="btn btn-info">
+                                    <a href="{{ route('home.productdetail', $product->slug_product) }}" class="btn btn-info">
                                         Detail
                                     </a>
                                 </div>
@@ -198,8 +198,8 @@
                                     @else
                                     <p>
                                         @php
-                                        $realprice = $promo->price;
-                                        $discount = (100/100 - $promo->discount / 100) * $realprice;
+                                        $realprice = $product->price;
+                                        $discount = (100/100 - $product->discount / 100) * $realprice;
                                         @endphp
                                         Rp. {{ number_format($discount, 2) }}
                                     </p>
