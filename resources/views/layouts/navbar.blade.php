@@ -4,7 +4,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2f4156; margin-bottom: 1rem;">
     <div class="container">
-        <a class="navbar-brand" href="#" style="font-size:25px; font-weight:500;">Fuushop</a>
+        <a class="navbar-brand" href="{{ route('home.index') }}" style="font-size:25px; font-weight:500;">Fuushop</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -18,9 +18,29 @@
                 <li class="nav-item dropdown {{ $active ==='kategori' ? 'active' : ' '}}">
                     <a class="nav-link" href="{{ route('home.category') }}">Category</a>
                 </li>
+<<<<<<< HEAD
                 @if($active === 'cart' || auth()->user())
+=======
+                <li class="nav-item {{ $active ==='contact' ? 'active' : ' '}}">
+                    <a class="nav-link" href="{{ route('home.contact') }}">Contact</a>
+                </li>
+                <li class="nav-item {{ $active ==='about' ? 'active' : ' '}}">
+                    <a class="nav-link" href="{{ route('home.about') }}">About Us</a>
+                </li>
+                @if($active === 'cart' || (Auth::check() && auth()->user()->role === 'member'))
+>>>>>>> 8280c044cc6fe208140364f6107289442cd81760
                     <li class="nav-item {{ $active === 'cart' ? 'active' : ' ' }}">
                         <a href="/cart" class="nav-link">Cart</a>
+                    </li>
+                @endif
+                @if($active === 'transactionhistory' || (Auth::check() && auth()->user()->role === 'member'))
+                    <li class="nav-item {{ $active === 'transactionhistory' ? 'active' : ' ' }}">
+                        <a href="/usertransaction" class="nav-link">Transaction</a>
+                    </li>
+                @endif
+                @if(Auth::check() && auth()->user()->role === 'admin')
+                    <li class="nav-item">
+                        <a href="/admin" class="nav-link">Dashboard</a>
                     </li>
                 @endif
                 @if(Auth::check())

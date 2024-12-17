@@ -6,10 +6,10 @@
         <div class="col col-lg-6 col-md-6">
             <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <h3 class="card-title">Form Sells Report</h3>
+                    <h3 class="card-title">Sells Report</h3>
                 </div>
                 <div class="card-body">
-                    <form action="#">
+                    <form action="{{ route('salesreport.process') }}" method="GET">
                         <div class="form-group">
                             <label for="month">Month</label>
                             <select name="month" id="month" class="form-control">

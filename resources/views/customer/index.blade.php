@@ -11,10 +11,10 @@
                         </h3>
                     </div>
                     <div class="card-body">
-                        <form action="#">
+                        <form action="{{ route('customer.find') }}" method="GET">
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Input Keyword">
+                                    <input type="text" name="key" id="key" class="form-control" placeholder="Find Customer name, telephone, status, or email">
                                 </div>
                                 <div class="col-auto">
                                     <button type="submit" class="btn btn-primary">
@@ -38,50 +38,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($itemcustomer as $customer)
+                                    @if($customer->role != 'admin')
                                     <tr>
-                                        <td>1</td>
-                                        <td>Axel</td>
-                                        <td>axelsavero@gmail.com</td>
-                                        <td>123456789012</td>
-                                        <td>Jl. Penggilingan No. 12</td>
-                                        <td>Active</td>
+                                        <td>{{ $no++ }}</td>
+                                        <td>{{ $customer->name }}</td>
+                                        <td>{{ $customer->email }}</td>
+                                        <td>{{ $customer->telephone }}</td>
+                                        <td>{{ $customer->address }}</td>
+                                        <td>{{ $customer->status }}</td>
                                         <td>
-                                            <a href="{{ route('customer.edit', 1) }}" class="btn btn-sm btn-primary">Edit</a>
+                                            <a href="{{ route('customer.edit', $customer->id_user) }}" class="btn btn-sm btn-primary">Edit</a>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Axel</td>
-                                        <td>axelsavero@gmail.com</td>
-                                        <td>123456789012</td>
-                                        <td>Jl. Penggilingan No. 12</td>
-                                        <td>Active</td>
-                                        <td>
-                                            <a href="{{ route('customer.edit', 1) }}" class="btn btn-sm btn-primary">Edit</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Axel</td>
-                                        <td>axelsavero@gmail.com</td>
-                                        <td>123456789012</td>
-                                        <td>Jl. Penggilingan No. 12</td>
-                                        <td>Active</td>
-                                        <td>
-                                            <a href="{{ route('customer.edit', 1) }}" class="btn btn-sm btn-primary">Edit</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Axel</td>
-                                        <td>axelsavero@gmail.com</td>
-                                        <td>123456789012</td>
-                                        <td>Jl. Penggilingan No. 12</td>
-                                        <td>Active</td>
-                                        <td>
-                                            <a href="{{ route('customer.edit', 1) }}" class="btn btn-sm btn-primary">Edit</a>
-                                        </td>
-                                    </tr>
+                                    @endif
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

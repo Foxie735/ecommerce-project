@@ -48,7 +48,7 @@
     <img class="bg-img" src="{{ asset('assets/images/bg1.jpg') }}" alt="bg image">
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2f4156;">
         <div class="container">
-            <a class="navbar-brand fw-semibold" href="#" style="font-size:25px;">
+            <a class="navbar-brand fw-semibold" href="{{ route('home.index') }}" style="font-size:25px;">
                 <img class="text-align" src="{{ asset('assets/images/logo-fs.jpg') }}" alt="logo fs" width="30" height="24" class="d-inline-block align-text-top">
                 Fuushop
             </a> 

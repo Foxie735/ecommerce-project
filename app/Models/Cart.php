@@ -14,6 +14,11 @@ class Cart extends Model
         return $this->hasMany(CartDetail::class, 'id_cart', 'id_cart');
     }
 
+    public function Order()
+    {
+        return $this->hasMany(Order::class, 'id_cart', 'id_cart');
+    }
+
     public function updatetotal($itemcart, $operator, $subtotal) {
         if($operator == '+') {
             $this->attributes['subtotal'] = $itemcart->subtotal + $subtotal;

@@ -31,7 +31,7 @@ class KategoriController extends Controller
                             ->orWhere('name_category','LIKE','%'.$find.'%')
                             ->orWhere('status','LIKE','%'.$find.'%')
                             ->paginate(1);
-        return view('category.index', compact('title', 'items'));
+        return view('category.index', compact('title', 'items', 'find'));
     }
 
     /**

@@ -45,7 +45,7 @@
 <div class="container d-flex justify-content-center" style="min-height: 90vh">
     <div class="card m-auto" style="width: 360px;">
         <div class="card-header text-center">
-            <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>
+            <a href="{{ route('home.index') }}" class="h1">Fuushop</a>
         </div>
         <div class="card-body">
             <p class="login-box-msg">You are only one step a way from your new password, recover your password now.</p>

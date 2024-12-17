@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\CartDetail;
 use App\Models\Product;
+use App\Models\ShippingAddress;
 use Illuminate\Http\Request;
 
 use function Laravel\Prompts\alert;
@@ -22,7 +23,7 @@ class CartController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-         $itemcart = Cart::where('id_user', $user->id_user)
+        $itemcart = Cart::where('id_user', $user->id_user)
                     ->where('status_cart', 'process')
                     ->first();
         if($itemcart) {
@@ -98,5 +99,30 @@ class CartController extends Controller
         $itemcart->CartDetail()->delete();
         $itemcart->updatetotal($itemcart, '-', $itemcart->subtotal);
         return back()->with('success', 'Cart successfully emptied');
+    }
+
+    public function checkout(Request $request)
+    {
+        $itemuser = auth()->user();
+
+        $itemcart = Cart::where('id_user', $itemuser->id_user)
+                    ->where('status_cart', 'process')
+                    ->first();
+
+        $itemshippingaddress = ShippingAddress::where('id_user', $itemuser->id_user)
+                            ->where('status', '1')
+                            ->first();
+
+        if($itemcart) {
+            $data = array(
+                'title' => 'Checkout',
+                'itemcart' => $itemcart,
+                'active' => 'cart',
+                'itemshippingaddress' => $itemshippingaddress
+            );
+            return view('cart.checkout', $data)->with('no', 1);
+        } else {
+            return abort('404');
+        }
     }
 }
