@@ -14,42 +14,61 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>Name</td>
-                                <td>Axel</td>
-                            </tr>
-                            <tr>
-                                <td>Email</td>
-                                <td>axelsavero@gmail.com</td>
-                            </tr>
-                            <tr>
-                                <td>Telephone</td>
-                                <td>123456789012</td>
-                            </tr>
-                            <tr>
-                                <td>Address</td>
-                                <td>Jl. Penggilingan No.12</td>
-                            </tr>
-                            <tr>
-                                <td>Status</td>
-                                <td>
-                                    <form action="#" class="form-inline">
-                                        <div class="form-group mr-2">
-                                            <select name="status" id="status" class="form-control">
-                                                <option value="active">Active</option>
-                                                <option value="nonactive">Non Active</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary">Update</button>
-                                        </div>
-                                    </form>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    @if (count($errors) > 0)
+                    @foreach ($errors->all() as $error)
+                        <div class="alert alert-warning">{{ $error }}</div>
+                    @endforeach
+                    @endif
+                    @if($message = Session::get('error'))
+                        <div class="alert alert-warning">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
+                    @if($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
+                    <form action="{{ route('customer.update', $itemcustomer->id_user) }}" method="POST">
+                        @csrf
+                        @method('put')
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>{{ $itemcustomer->name }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>{{ $itemcustomer->email }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Telephone</td>
+                                    <td>{{ $itemcustomer->telephone }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <td>{{ $itemcustomer->address }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td>
+                                        <form action="#" class="form-inline">
+                                            <div class="form-group mr-2">
+                                                <select name="status" id="status" class="form-control">
+                                                    <option value="active" {{ $itemcustomer->status === 'active' ? 'selected' : '' }}>Active</option>
+                                                    <option value="inactive" {{ $itemcustomer->status === 'inactive' ? 'selected' : '' }}>Non Active</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary">Update</button>
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
                 </div>
             </div>
         </div>

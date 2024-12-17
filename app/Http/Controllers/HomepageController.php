@@ -21,6 +21,12 @@ class HomepageController extends Controller
                         ->get();
         $itemcategory = Category::orderBy('name_category', 'asc')->limit(6)->get();
         $itemslide = Slideshow::get();
+
+        // if(auth()->user()) {
+        //     if(auth()->user()->role === "admin") {
+        //         return redirect('/admin');
+        //     }
+        // }
         return view('homepage.index', compact('title', 'active', 'itemproduct', 'productpromo', 'itemcategory', 'itemslide'));
     }
     public function about() 

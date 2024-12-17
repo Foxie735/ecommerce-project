@@ -21,38 +21,34 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($itemorder->Cart->CartDetail as $detail)  
                                     <tr>
-                                        <td>1</td>
-                                        <td>KATE-1</td>
-                                        <td>Kimbab</td>
-                                        <td class="text-right">15.000</td>
-                                        <td class="text-right">2</td>
-                                        <td class="text-right">30.000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>KATE-2</td>
-                                        <td>Kimbab</td>
-                                        <td class="text-right">35.000</td>
-                                        <td class="text-right">2</td>
-                                        <td class="text-right">70.000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>KATE-3</td>
-                                        <td>Kimbab</td>
-                                        <td class="text-right">25.000</td>
-                                        <td class="text-right">2</td>
-                                        <td class="text-right">50.000</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5">
-                                            <b>Total</b>
+                                        <td>{{ $no++ }}</td>
+                                        <td>
+                                            {{ $detail->Product->code_product }}
+                                        </td>
+                                        <td>
+                                            {{ $detail->Product->name_product }}
                                         </td>
                                         <td class="text-right">
-                                            <b>150.000</b>
+                                            {{ number_format($detail->price, 2) }}
+                                        </td>
+                                        <td class="text-right">
+                                            {{ $detail->quantity }}
+                                        </td>
+                                        <td class="text-right">
+                                            {{ number_format($detail->subtotal, 2) }}
                                         </td>
                                     </tr>
+                                    @endforeach
+                                    <td colspan="5">
+                                        <b>Total</b>
+                                    </td>
+                                    <td class="text-right">
+                                        <b>
+                                            {{ number_format($itemorder->Cart->total, 2) }}
+                                        </b>
+                                    </td>
                                 </tbody>
                             </table>
                         </div>
@@ -64,73 +60,89 @@
             </div>
             <div class="col col-lg-4 col-md-4 mb-2">
                 <div class="card">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <td>Total</td>
-                                    <td>
-                                        <input type="text" name="total" id="total" class="form-control" value="127.000">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Subtotal</td>
-                                    <td>
-                                        <input type="text" name="subtotal" id="subtotal" class="form-control" value="150.000">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Discount</td>
-                                    <td>
-                                        <input type="text" name="discount" id="discount" class="form-control" value="0">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Shipping Cost</td>
-                                    <td>
-                                        <input type="text" name="shipping_cost" id="shipping_cost" class="form-control" value="150.000">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Shipping</td>
-                                    <td>
-                                        <input type="text" name="shipping" id="shipping" class="form-control" value="150.000">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>No. Receipt</td>
-                                    <td>
-                                        <input type="text" name="subtotal" id="subtotal" class="form-control" value="150.000">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Payment Status</td>
-                                    <td>
-                                        <select name="payment_status" id="payment_status" class="form-control">
-                                            <option value="done">Paid</option>
-                                            <option value="not_done">Not Paid</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Status</td>
-                                    <td>
-                                        <select name="payment_status" id="payment_status" class="form-control">
-                                            <option value="checkout">Checkout</option>
-                                            <option value="process">On Process</option>
-                                            <option value="delivery">On Delivery</option>
-                                            <option value="accepted">Accepted</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td class="text-right">
-                                        <button type="submit" class="btn btn-primary">Update</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="card-header">
+                        Summary
+                    </div>
+                    <div class="card-body">
+                        @if (count($errors) > 0)
+                            @foreach ($errors->all() as $error)
+                                <div class="alert alert-warning">{{ $error }}</div>
+                            @endforeach
+                        @endif
+                        @if($message = Session::get('error'))
+                            <div class="alert alert-warning">
+                                <p>{{ $message }}</p>
+                            </div>
+                        @endif
+                        @if($message = Session::get('success'))
+                            <div class="alert alert-success">
+                                <p>{{ $message }}</p>
+                            </div>
+                        @endif
+                        <div class="table-responsive">
+                            <table class="table">
+                                <form action="{{ route('transaction.update', $itemorder->id_order) }}" method="post">
+                                    @csrf
+                                    @method('patch')
+                                    <tbody>
+                                        <tr>
+                                            <td>Total</td>
+                                            <td>
+                                                <input type="text" name="total" id="total" class="form-control" value="{{ $itemorder->Cart->total }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Subtotal</td>
+                                            <td>
+                                                <input type="text" name="subtotal" id="subtotal" class="form-control" value="{{ $itemorder->Cart->subtotal }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shipping Cost</td>
+                                            <td>
+                                                <input type="text" name="shipping_cost" id="shipping_cost" class="form-control" value="{{ $itemorder->Cart->shipping_cost }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Expedition</td>
+                                            <td>
+                                                <input type="text" name="expedition" id="expedition" class="form-control" value="{{ $itemorder->Cart->expedition }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>No. Receipt</td>
+                                            <td>
+                                                <input type="text" name="no_receipt" id="no_receipt" class="form-control" value="{{ $itemorder->Cart->no_receipt }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Payment Status</td>
+                                            <td>
+                                                <select name="payment_status" id="payment_status" class="form-control">
+                                                    <option value="paid" {{ $itemorder->Cart->payment_status == 'paid' ? 'selected' : '' }}>Paid</option>
+                                                    <option value="notpaid" {{ $itemorder->Cart->payment_status == 'notpaid' ? 'selected' : '' }}>Not Paid</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Status</td>
+                                            <td>
+                                                <select name="delivery_status" id="delivery_status" class="form-control">
+                                                    <option value="done" {{ $itemorder->Cart->delivery_status == 'done' ? 'selected' : '' }}>Done</option>
+                                                    <option value="notdone" {{ $itemorder->Cart->delivery_status == 'notdone' ? 'selected' : '' }}>Not done</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-right">
+                                                <button type="submit" class="btn btn-primary">Update</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </form>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -124,7 +124,7 @@
                         </a>
                         @endif
                         <div class="card-body">
-                            <a href="#" class="text-decoration-none">
+                            <a href="{{ route('home.productdetail', $promo->slug_product) }}" class="text-decoration-none">
                                 <p class="card-text">
                                     {{ $promo->name_product }}
                                 </p>
@@ -178,7 +178,7 @@
                         </a>
                         @endif
                         <div class="card-body">
-                            <a href="#" class="text-decoration-none">
+                            <a href="{{ route('home.productdetail', $product->slug_product) }}" class="text-decoration-none">
                                 <p class="card-text">
                                     {{ $product->name_product }}
                                 </p>
@@ -214,5 +214,4 @@
         </div>
     </div>
     {{-- end new product --}}
-    
 @endsection

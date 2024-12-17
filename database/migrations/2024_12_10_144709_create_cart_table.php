@@ -15,14 +15,13 @@ return new class extends Migration
             $table->increments('id_cart');
             $table->unsignedBigInteger('id_user');
             $table->string('no_invoice');
-            $table->enum('status_cart', ['process', 'active', 'inactive']);
+            $table->enum('status_cart', ['process', 'checkout']);
             $table->enum('payment_status', ['paid', 'notpaid']);
             $table->enum('delivery_status', ['done', 'notdone']);
             $table->string('no_receipt')->nullable();
             $table->string('expedition')->nullable();
             $table->double('subtotal')->default(0);
             $table->double('shipping_cost')->default(0);
-            $table->double('discount')->default(0);
             $table->double('total')->default(0);
             $table->timestamps();
         });

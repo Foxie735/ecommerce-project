@@ -8,10 +8,11 @@ use App\Http\Controllers\Admin\ProdukController;
 use App\Http\Controllers\Admin\SlideshowController;
 use App\Http\Controllers\Admin\TransaksiController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\AlamatPengirimanController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartDetailController;
 use App\Http\Controllers\HomepageController;
-use App\Models\CartDetail;
+use App\Http\Controllers\TransaksiUserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,10 +26,15 @@ Route::get('/category', [HomepageController::class, 'category'])->name('home.cat
 Route::get('/productdetail/{slug}', [HomepageController::class, 'productdetail'])->name('home.productdetail');
 Route::get('/category/{slug}', [HomepageController::class, 'categorybyslug'])->name('home.categorybyslug');
 
-Route::middleware(['auth', 'role:member'])->group(function () {
+Route::middleware(['auth', 'role:member', 'status:active'])->group(function () {
     Route::resource('cart', CartController::class);
+    Route::get('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
     Route::patch('empty/{id}', [CartController::class, 'empty']);
     Route::resource('cartdetail', CartDetailController::class);
+
+    Route::resource('usertransaction', TransaksiUserController::class);
+
+    Route::resource('shippingaddress', AlamatPengirimanController::class);
 });
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
@@ -44,18 +50,20 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::delete('/image-product/{id}', [ProdukController::class, 'destroy_image'])->name('product.destroy_image');
         // Route Customer
         Route::resource('customer', CustomerController::class);
+        Route::get('/find-customer', [CustomerController::class, 'find'])->name('customer.find');
         // Route Transaksi
         Route::resource('transaction', TransaksiController::class);
+        Route::get('/find-transaction', [TransaksiController::class, 'find'])->name('transaction.find');
         // Route Profile
-        Route::get('/profile', [UserController::class, 'index'])->name('profile.index');
+        // Route::get('/profile', [UserController::class, 'index'])->name('profile.index');
         // Route Setting Profile
-        Route::get('/setting', [UserController::class, 'setting'])->name('profile.setting');
+        // Route::get('/setting', [UserController::class, 'setting'])->name('profile.setting');
         // Route Slideshow
         Route::resource('slideshow', SlideshowController::class);
         // Form Laporan
-        Route::get('/report', [LaporanController::class, 'index'])->name('report');
+        Route::get('/salesreport', [LaporanController::class, 'index'])->name('salesreport');
         // Proses Laporan
-        Route::get('/processreport', [LaporanController::class, 'process'])->name('report.process');
+        Route::get('/processreport', [LaporanController::class, 'process'])->name('salesreport.process');
     });
 });
 

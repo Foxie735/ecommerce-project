@@ -108,12 +108,6 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Discount</td>
-                            <td class="text-right">
-                                {{ number_format($itemcart->discount, 2) }}
-                            </td>
-                        </tr>
-                        <tr>
                             <td>Total</td>
                             <td class="text-right">
                                 {{ number_format($itemcart->total, 2) }}
@@ -124,7 +118,9 @@
                 <div class="card-footer">
                     <div class="row">
                         <div class="col">
-                            <button class="btn btn-primary btn-block">Checkout</button>
+                            <a href="{{ route('cart.checkout') }}" class="btn btn-primary btn-block">
+                                Checkout
+                            </a>
                         </div>
                         <div class="col">
                             <form action="{{ url('empty') . '/' . $itemcart->id_cart }}" method="post">

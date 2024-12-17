@@ -11,10 +11,26 @@
                         </h3>
                     </div>
                     <div class="card-body">
-                        <form action="#">
+                        @if (count($errors) > 0)
+                            @foreach ($errors->all() as $error)
+                                <div class="alert alert-warning">{{ $error }}</div>
+                            @endforeach
+                        @endif
+                        @if($message = Session::get('error'))
+                            <div class="alert alert-warning">
+                                <p>{{ $message }}</p>
+                            </div>
+                        @endif
+                        @if($message = Session::get('success'))
+                            <div class="alert alert-success">
+                                <p>{{ $message }}</p>
+                            </div>
+                        @endif
+                        <form action="{{ route('transaction.find') }}" method="GET">
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Input Keyword">
+                                    <input type="text" name="key" id="key" class="form-control" 
+                                    placeholder="search by sender name, sent name, and payment status or delivery status">
                                 </div>
                                 <div class="col-auto">
                                     <button type="submit" class="btn btn-primary">
@@ -32,7 +48,6 @@
                                         <th>No</th>
                                         <th>Invoice</th>
                                         <th>Sub Total</th>
-                                        <th>Discount</th>
                                         <th>Shipping Cost</th>
                                         <th>Total</th>
                                         <th>Payment Status</th>
@@ -41,19 +56,33 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($itemorder as $order)
                                     <tr>
-                                        <td>1</td>
-                                        <td>Inv-01</td>
-                                        <td>200.000</td>
-                                        <td>0</td>
-                                        <td>227.000</td>
-                                        <td>Not Paid</td>
-                                        <td>Checkout</td>
+                                        <td>{{ ++$no }}</td>
+                                        <td>{{ $order->no_invoice }}</td>
+                                        <td>{{ number_format($order->subtotal, 2) }}</td>
+                                        <td>{{ number_format($order->shipping_cost, 2) }}</td>
+                                        <td>{{ number_format($order->total + $order->shipping_cost, 2) }}</td>
                                         <td>
-                                            <a href="{{ route('transaction.show', 1) }}" class="btn btn-sm btn-info">Detail</a>
-                                            <a href="{{ route('transaction.edit', 1) }}" class="btn btn-sm btn-primary">Edit</a>
+                                            @if($order->payment_status === 'notpaid')
+                                                Not paid
+                                            @else
+                                                Paid
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($order->delivery_status === 'notdone')
+                                                Not done
+                                            @else
+                                                Done
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('transaction.show', $order->id_order) }}" class="btn btn-sm btn-info">Detail</a>
+                                            <a href="{{ route('transaction.edit', $order->id_order) }}" class="btn btn-sm btn-primary">Edit</a>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

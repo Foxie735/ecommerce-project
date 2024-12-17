@@ -88,8 +88,8 @@
                             @else
                             <p>
                                 @php
-                                $realprice = $promo->price;
-                                $discount = (100/100 - $promo->discount / 100) * $realprice;
+                                $realprice = $product->price;
+                                $discount = (100/100 - $product->discount / 100) * $realprice;
                                 @endphp
                                 Rp. {{ number_format($discount, 2) }}
                             </p>
