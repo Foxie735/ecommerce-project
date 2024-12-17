@@ -18,17 +18,7 @@
                 <li class="nav-item dropdown {{ $active ==='kategori' ? 'active' : ' '}}">
                     <a class="nav-link" href="{{ route('home.category') }}">Category</a>
                 </li>
-<<<<<<< HEAD
-                @if($active === 'cart' || auth()->user())
-=======
-                <li class="nav-item {{ $active ==='contact' ? 'active' : ' '}}">
-                    <a class="nav-link" href="{{ route('home.contact') }}">Contact</a>
-                </li>
-                <li class="nav-item {{ $active ==='about' ? 'active' : ' '}}">
-                    <a class="nav-link" href="{{ route('home.about') }}">About Us</a>
-                </li>
                 @if($active === 'cart' || (Auth::check() && auth()->user()->role === 'member'))
->>>>>>> 8280c044cc6fe208140364f6107289442cd81760
                     <li class="nav-item {{ $active === 'cart' ? 'active' : ' ' }}">
                         <a href="/cart" class="nav-link">Cart</a>
                     </li>
@@ -38,18 +28,18 @@
                         <a href="/usertransaction" class="nav-link">Transaction</a>
                     </li>
                 @endif
-                @if(Auth::check() && auth()->user()->role === 'admin')
-                    <li class="nav-item">
-                        <a href="/admin" class="nav-link">Dashboard</a>
-                    </li>
-                @endif
-                @if(Auth::check())
                 <li class="nav-item {{ $active ==='contact' ? 'active' : ' '}}">
                     <a class="nav-link" href="{{ route('home.contact') }}">Contact</a>
                 </li>
                 <li class="nav-item {{ $active ==='about' ? 'active' : ' '}}">
                     <a class="nav-link" href="{{ route('home.about') }}">About Us</a>
                 </li>
+                @if(Auth::check() && auth()->user()->role === 'admin')
+                    <li class="nav-item">
+                        <a href="/admin" class="nav-link">Dashboard</a>
+                    </li>
+                @endif
+                @if(Auth::check())
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         Logout

@@ -51,7 +51,7 @@
                                 <tbody>
                                     <tr>
                                         <td>Total</td>
-                                        <td>{{ number_format($itemorder->Cart->total, 2) }}</td>
+                                        <td>{{ number_format($itemorder->Cart->total + $itemorder->Cart->shipping_cost, 2) }}</td>
                                     </tr>
                                     <tr>
                                         <td>Subtotal</td>

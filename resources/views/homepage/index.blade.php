@@ -123,7 +123,7 @@
                         @endif
                         <div class="card-body">
                             <a href="{{ route('home.productdetail', $promo->slug_product) }}" class="text-decoration-none">
-                                <p class="card-title text-dark">
+                                <h5 class="card-title text-dark">
                                     {{ $promo->name_product }}
                                 </h5>
                             </a>
