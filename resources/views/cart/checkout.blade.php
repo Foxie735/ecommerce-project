@@ -120,11 +120,6 @@
                         Summary
                     </div>
                     <div class="card-body">
-                        @if($message = Session::get('expedition'))
-                            <div class="alert alert-success">
-                                <p>Expedition Added</p>
-                            </div>
-                        @endif
                         <table class="table">
                             <tr>
                                 <td>No Invoice</td>
@@ -144,21 +139,6 @@
                                     {{ number_format($itemcart->total, 2) }}
                                 </td>
                             </tr>
-                            @if($shippingcost = Session::get('expedition'))
-                                <tr>
-                                    <td>Shipping Cost</td>
-                                    <td class="text-right">
-                                        {{ number_format($shippingcost, 2) }}
-                                    </td>
-                                </tr>
-                            @else
-                                <tr>
-                                    <td>Shipping Cost</td>
-                                    <td class="text-right">
-                                        Haven't chosen an expedition yet
-                                    </td>
-                                </tr>
-                            @endif
                         </table>
                     </div>
                     <div class="card-footer">
