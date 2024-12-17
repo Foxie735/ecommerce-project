@@ -18,18 +18,18 @@
                 <li class="nav-item dropdown {{ $active ==='kategori' ? 'active' : ' '}}">
                     <a class="nav-link" href="{{ route('home.category') }}">Category</a>
                 </li>
-                <li class="nav-item {{ $active ==='contact' ? 'active' : ' '}}">
-                    <a class="nav-link" href="{{ route('home.contact') }}">Contact</a>
-                </li>
-                <li class="nav-item {{ $active ==='about' ? 'active' : ' '}}">
-                    <a class="nav-link" href="{{ route('home.about') }}">About Us</a>
-                </li>
                 @if($active === 'cart' || auth()->user())
                     <li class="nav-item {{ $active === 'cart' ? 'active' : ' ' }}">
                         <a href="/cart" class="nav-link">Cart</a>
                     </li>
                 @endif
                 @if(Auth::check())
+                <li class="nav-item {{ $active ==='contact' ? 'active' : ' '}}">
+                    <a class="nav-link" href="{{ route('home.contact') }}">Contact</a>
+                </li>
+                <li class="nav-item {{ $active ==='about' ? 'active' : ' '}}">
+                    <a class="nav-link" href="{{ route('home.about') }}">About Us</a>
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         Logout
