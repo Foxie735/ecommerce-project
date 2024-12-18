@@ -108,7 +108,7 @@
             </div>
             <div class="m-auto row">
                 @foreach($productpromo as $promo)
-                <div class="col">
+                <div class="col-auto">
                     <div class="card mb-4 shadow">
                         @if($promo->ImageProduct->isNotEmpty())
                         @foreach($promo->ImageProduct->take(1) as $image)
@@ -123,7 +123,7 @@
                         @endif
                         <div class="card-body">
                             <a href="{{ route('home.productdetail', $promo->slug_product) }}" class="text-decoration-none">
-                                <h5 class="card-title text-dark">
+                                <p class="card-title text-dark">
                                     {{ $promo->name_product }}
                                 </h5>
                             </a>
@@ -161,47 +161,48 @@
                 <h2 class="text-center">New Product</h2>
                 <div class="category-divider"></div>
             </div>
-            @foreach($itemproduct as $product)
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        @if($product->ImageProduct->isNotEmpty())
-                            @foreach($product->ImageProduct->take(1) as $image)
-                                <a href="{{ route('home.productdetail', $product->slug_product) }}">
-                                    <img src="{{ asset($image->img_product) }}" alt="" class="card-img-top fixed-img">
-                                </a>
-                            @endforeach
-                        @else
-                        <a href="#">
-                            <img src="{{ asset('default-image.jpg') }}" alt="No Image" class="card-img-top fixed-img">
-                        </a>
-                        @endif
-                        <div class="card-body">
-                            <a href="{{ route('home.productdetail', $product->slug_product) }}" class="text-decoration-none">
-                                <h5 class="card-text text-dark">
-                                    {{ $product->name_product }}
-                                </h5>
-                            </a>
-                            <div class="row mt-4">
-                                <div class="col">
-                                    <a href="{{ route('home.productdetail', $product->slug_product) }}" class="btn btn-info">
-                                        Detail
+            <div class="m-auto row">
+                @foreach($itemproduct as $product)
+                    <div class="col-auto">
+                        <div class="card mb-4 shadow-sm">
+                            @if($product->ImageProduct->isNotEmpty())
+                                @foreach($product->ImageProduct->take(1) as $image)
+                                    <a href="{{ route('home.productdetail', $product->slug_product) }}">
+                                        <img src="{{ asset($image->img_product) }}" alt="" class="card-img-top fixed-img">
                                     </a>
-                                </div>
-                                <div class="col-auto">
-                                    @if(empty($product->discount))
-                                    <p>
-                                        Rp. {{ number_format($product->price, 2) }}
-                                    </p>
-
-                                    @else
-                                    <p>
-                                        @php
-                                        $realprice = $product->price;
-                                        $discount = (100/100 - $product->discount / 100) * $realprice;
-                                        @endphp
-                                        Rp. {{ number_format($discount, 2) }}
-                                    </p>
-                                    @endif
+                                @endforeach
+                            @else
+                            <a href="#">
+                                <img src="{{ asset('default-image.jpg') }}" alt="No Image" class="card-img-top fixed-img">
+                            </a>
+                            @endif
+                            <div class="card-body">
+                                <a href="{{ route('home.productdetail', $product->slug_product) }}" class="text-decoration-none">
+                                    <h5 class="card-text text-dark">
+                                        {{ $product->name_product }}
+                                    </h5>
+                                </a>
+                                <div class="row mt-4">
+                                    <div class="col-auto">
+                                        @if(empty($product->discount))
+                                        <p>
+                                            Rp. {{ number_format($product->price, 2) }}
+                                        </p>
+                                        @else
+                                        <p>
+                                            @php
+                                            $realprice = $product->price;
+                                            $discount = (100/100 - $product->discount / 100) * $realprice;
+                                            @endphp
+                                            Rp. {{ number_format($discount, 2) }}
+                                        </p>
+                                        @endif
+                                    </div>
+                                    <div class="col">
+                                        <a href="{{ route('home.productdetail', $product->slug_product) }}" class="btn btn-info">
+                                            Detail
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
