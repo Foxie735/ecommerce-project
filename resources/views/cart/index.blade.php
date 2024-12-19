@@ -1,15 +1,26 @@
 @extends('layouts.template')
 @section('content')
+<style>
+    .co {
+        background-color: #2f4156;
+        color: white;
+    }
+
+    .co:hover {
+        background-color: #1b2530;
+        color: #f7f5f5;
+    }
+</style>
 <div class="container">
     <div class="row">
         <div class="col col-md-8">
             @if (count($errors) > 0)
                 @foreach ($errors->all() as $error)
-                    <div class="alert alert-warning">{{ $error }}</div>
+                    <div class="alert alert-danger">{{ $error }}</div>
                 @endforeach
             @endif
             @if($message = Session::get('error'))
-                <div class="alert alert-warning">
+                <div class="alert alert-danger">
                     <p>{{ $message }}</p>
                 </div>
             @endif
@@ -19,11 +30,11 @@
                 </div>
             @endif
             <div class="card">
-                <div class="card-header">
-                    Item
+                <div class="card-header bg-info text-light">
+                    <h6>Item</h6>
                 </div>
-                <div class="card-body">
-                    <table class="table table-striped">
+                <div class="card-body border border-info">
+                    <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -52,18 +63,18 @@
                                                 @method('patch')
                                                 @csrf
                                                 <input type="hidden" name="param" value="minus">
-                                                <button class="btn btn-primary btn-sm">
+                                                <button class="btn btn-sm co">
                                                     -
                                                 </button>
                                             </form>
-                                            <button class="btn btn-outline-primary btn-sm" disabled="true">
+                                            <button class="btn btn-outline-dark btn-sm" disabled="true">
                                                 {{ number_format($detail->quantity, 2) }}
                                             </button>
                                             <form action="{{ route('cartdetail.update', $detail->id_cart_detail) }}" method="POST">
                                                 @method('patch')
                                                 @csrf
                                                 <input type="hidden" name="param" value="plus">
-                                                <button class="btn btn-primary btn-sm">
+                                                <button class="btn btn-sm co">
                                                     +
                                                 </button>
                                             </form>
@@ -89,9 +100,9 @@
             </div>
         </div>
         <div class="col col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    Summary
+            <div class="card border border-info mb-4">
+                <div class="card-header bg-info text-light">
+                    <h6>Summary</h6>
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -115,22 +126,23 @@
                         </tr>
                     </table>
                 </div>
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="col">
-                            <a href="{{ route('cart.checkout') }}" class="btn btn-primary btn-block">
-                                Checkout
-                            </a>
-                        </div>
-                        <div class="col">
-                            <form action="{{ url('empty') . '/' . $itemcart->id_cart }}" method="post">
-                                @method('patch')
-                                @csrf
-                                <button type="submit" class="btn btn-danger btn-block">Empty</button>
-                            </form>
-                        </div>
+                <!-- <div class="card-footer border border-info"> -->
+                    <div>
+                        <a href="{{ route('cart.checkout') }}" class="btn btn-block co rounded-0">
+                            Checkout
+                        </a>
                     </div>
+                <!-- </div> -->
+            </div>
+            <div class="card border border-info mb-4">
+                <div class="card-header">
+                    <h6>Remove All Cart</h6>
                 </div>
+                <form action="{{ url('empty') . '/' . $itemcart->id_cart }}" method="post">
+                    @method('patch')
+                    @csrf
+                    <button type="submit" class="btn btn-danger btn-block rounded-0">Empty</button>
+                </form>
             </div>
         </div>
     </div>

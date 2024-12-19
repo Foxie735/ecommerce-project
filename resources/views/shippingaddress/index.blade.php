@@ -1,14 +1,27 @@
 @extends('layouts.template')
 
 @section('content')
+
+<style>
+    .co {
+        background-color: #2f4156;
+        color: white;
+    }
+
+    .co:hover {
+        background-color: #1b2530;
+        color: #f7f5f5;
+    }
+</style>
+
     <div class="container">
         <div class="row">
             <div class="col col-8 mb-2">
-                <div class="card">
-                    <div class="card-header">
+                <div class="card border border-info">
+                    <div class="card-header bg-info text-light">
                         <div class="row">
                             <div class="col">
-                                Shipping Address
+                                <h6>Shipping Address</h6>
                             </div>
                             <div class="col-auto">
                                 <a href="{{ route('cart.checkout') }}" class="btn btn-sm btn-danger">
@@ -51,11 +64,11 @@
                                                     @method('patch')
                                                     @csrf
                                                     @if($shipping->status == '1')
-                                                        <button type="submit" class="btn btn-primary btn-sm" disabled>
+                                                        <button type="submit" class="btn btn-info btn-sm" disabled>
                                                             Set Priority
                                                         </button>
                                                     @else
-                                                        <button type="submit" class="btn btn-primary btn-sm">
+                                                        <button type="submit" class="btn btn-sm border border-info">
                                                             Set Priority
                                                         </button>    
                                                     @endif
@@ -73,9 +86,9 @@
                 </div>
             </div>
             <div class="col col-4 mb-2">
-                <div class="card">
-                    <div class="card-header">
-                        Shipping Address Form
+                <div class="card border border-info">
+                    <div class="card-header bg-info text-light">
+                        <h6>Shipping Address Form</h6>
                     </div>
                     <div class="card-body">
                         @if (count($errors) > 0)
@@ -139,10 +152,10 @@
                                         <input type="text" name="postal_code" class="form-control"
                                             value="{{ old('postal_code') }}">
                                     </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">Save</button>
-                                    </div>
                                 </div>
+                            </div>
+                            <div class="mt-2">
+                                <button type="submit" class="btn btn-block co">Save</button>
                             </div>
                         </form>
                     </div>

@@ -1,6 +1,19 @@
 @extends('layouts.template')
 
 @section('content')
+
+<style>
+    .co {
+        background-color: #2f4156;
+        color: white;
+    }
+
+    .co:hover {
+        background-color: #1b2530;
+        color: #f7f5f5;
+    }
+</style>
+
     <div class="container">
         <div class="row">
             <div class="col col-8">
@@ -21,12 +34,12 @@
                 @endif
                 <div class="row mb-2">
                     <div class="col col-12 mb-2">
-                        <div class="card">
-                            <div class="card-header">
-                                Item
+                        <div class="card border border-info">
+                            <div class="card-header bg-info text-light">
+                                <h6>Item</h6>
                             </div>
                             <div class="card-body">
-                                <table class="table table-striped">
+                                <table class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -64,8 +77,10 @@
                         </div>
                     </div>
                     <div class="col col-12">
-                        <div class="card">
-                            <div class="card-header">Shipping Address</div>
+                        <div class="card border border-info">
+                            <div class="card-header bg-info text-light">
+                                <h6>Shipping Address</h6>
+                            </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-striped">
@@ -106,7 +121,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <a href="{{ route('shippingaddress.index') }}" class="btn btn-sm btn-primary">
+                                <a href="{{ route('shippingaddress.index') }}" class="btn btn-sm co">
                                     Add Address
                                 </a>
                             </div>
@@ -115,9 +130,9 @@
                 </div>
             </div>
             <div class="col col-4">
-                <div class="card">
-                    <div class="card-header">
-                        Summary
+                <div class="card border border-info">
+                    <div class="card-header bg-info text-light">
+                        <h6>Summary</h6>
                     </div>
                     <div class="card-body">
                         <table class="table">
@@ -141,10 +156,10 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="card-footer">
+                    <div>
                         <form action="{{ route('usertransaction.store') }}" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-danger btn-block">Make an order</button>
+                            <button type="submit" class="btn btn-danger btn-block rounded-0">Make an order</button>
                         </form>
                     </div>
                 </div>
