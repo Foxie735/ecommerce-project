@@ -15,9 +15,11 @@
                 <li class="nav-item {{ $active ==='home' ? 'active' : ' '}}">
                     <a class="nav-link" href="{{ route('home.index') }}">Home<span class="sr-only">(current)</span></a>
                 </li>
+                @if($active === 'category' || (Auth::check() && auth()->user()->role === 'member'))
                 <li class="nav-item dropdown {{ $active ==='kategori' ? 'active' : ' '}}">
                     <a class="nav-link" href="{{ route('home.category') }}">Category</a>
                 </li>
+                @endif
                 @if($active === 'cart' || (Auth::check() && auth()->user()->role === 'member'))
                     <li class="nav-item {{ $active === 'cart' ? 'active' : ' ' }}">
                         <a href="/cart" class="nav-link">Cart</a>
