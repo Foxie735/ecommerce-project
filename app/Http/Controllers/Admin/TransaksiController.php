@@ -37,7 +37,7 @@ class TransaksiController extends Controller
         } else if ($find === 'Done') {
             $find = 'done';
         } else {
-            $cari = $request->key;
+            $find = $request->key;
         }
 
         $itemorder = Cart::join('order', 'cart.id_cart', '=', 'order.id_cart')
