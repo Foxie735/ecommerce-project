@@ -4,12 +4,13 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <div class="card card-primary card-outline">
+                <div class="card card-info card-outline">
                     <div class="card-header">
                         <h3 class="card-title">Sells Report</h3>
                     </div>
                     <div class="card-body">
-                        <h3 class="text-center">Period {{ $month }} {{ $year }}</h3>
+                        <h3 class="text-center">Period [ {{ $month }} / {{ $year }} ]</h3>
+                        <hr>
                         <div class="row">
                             <div class="col col-lg-4 col-md-4">
                                 <h4 class="text-center">Transaction Summary</h4>
@@ -22,11 +23,11 @@
                                     @endphp
                                     <tbody>
                                         <tr>
-                                            <td>Total Sales</td>
+                                            <th>Total Sales</th>
                                             <td>Rp. {{ number_format($total, 2) }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Total Transaction</td>
+                                            <th>Total Transaction</th>
                                             <td>{{ count($itemtransaction) }} Transaction</td>
                                         </tr>
                                     </tbody>

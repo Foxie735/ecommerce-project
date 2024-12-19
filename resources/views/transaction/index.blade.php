@@ -1,6 +1,19 @@
 @extends('layouts.dashboard')
 
 @section('content')
+
+<style>
+    .co {
+        background-color: #2f4156;
+        color: white;
+    }
+
+    .co:hover {
+        background-color: #1b2530;
+        color: #f7f5f5;
+    }
+</style>
+
     <div class="container-fluid">
         <div class="row">
             <div class="col">
@@ -33,7 +46,7 @@
                                     placeholder="search by sender name, sent name, and payment status or delivery status">
                                 </div>
                                 <div class="col-auto">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn co">
                                         Search
                                     </button>
                                 </div>
@@ -79,7 +92,7 @@
                                         </td>
                                         <td>
                                             <a href="{{ route('transaction.show', $order->id_order) }}" class="btn btn-sm btn-info">Detail</a>
-                                            <a href="{{ route('transaction.edit', $order->id_order) }}" class="btn btn-sm btn-primary">Edit</a>
+                                            <a href="{{ route('transaction.edit', $order->id_order) }}" class="btn btn-sm btn-warning">Edit</a>
                                         </td>
                                     </tr>
                                     @endforeach

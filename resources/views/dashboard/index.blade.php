@@ -3,7 +3,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-8 col-lg-4">
-            <div class="small-box bg-primary">
+            <div class="small-box bg-success">
                 <div class="inner">
                     <h3>{{ $itemorder }}</h3>
                     <p>Order</p>

@@ -84,7 +84,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" class="btn btn-info">Update</button>
                             <button type="reset" class="btn btn-warning">Reset</button>
                         </div>
                     </form>

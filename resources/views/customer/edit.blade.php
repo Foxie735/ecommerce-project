@@ -60,19 +60,18 @@
                                                     <option value="inactive" {{ $itemcustomer->status === 'inactive' ? 'selected' : '' }}>Non Active</option>
                                                 </select>
                                             </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-primary">Update</button>
-                                            </div>
                                         </form>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-block">Update</button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="col col-lg-3 col-md-3"></div>
     </div>
 </div>
 @endsection

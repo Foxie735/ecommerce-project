@@ -77,7 +77,7 @@
                                         <input type="text" name="caption_title" class="form-control" required>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">Upload</button>
+                                        <button type="submit" class="btn btn-info">Upload</button>
                                     </div>
                                 </form>
                             </div>

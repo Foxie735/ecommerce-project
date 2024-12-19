@@ -133,15 +133,12 @@
                                                 </select>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td class="text-right">
-                                                <button type="submit" class="btn btn-primary">Update</button>
-                                            </td>
-                                        </tr>
                                     </tbody>
                                 </form>
                             </table>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-success btn-block">Update</button>
                         </div>
                     </div>
                 </div>
