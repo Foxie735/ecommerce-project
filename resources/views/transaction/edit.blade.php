@@ -46,7 +46,7 @@
                                     </td>
                                     <td class="text-right">
                                         <b>
-                                            {{ number_format($itemorder->Cart->total, 2) }}
+                                            {{ number_format($itemorder->Cart->total + $itemorder->Cart->shipping_cost, 2) }}
                                         </b>
                                     </td>
                                 </tbody>
@@ -80,10 +80,10 @@
                             </div>
                         @endif
                         <div class="table-responsive">
-                            <table class="table">
-                                <form action="{{ route('transaction.update', $itemorder->id_order) }}" method="post">
-                                    @csrf
-                                    @method('patch')
+                            <form action="{{ route('transaction.update', $itemorder->id_order) }}" method="post">
+                                @csrf
+                                @method('patch')
+                                <table class="table">
                                     <tbody>
                                         <tr>
                                             <td>Total</td>
@@ -134,12 +134,14 @@
                                             </td>
                                         </tr>
                                     </tbody>
-                                </form>
-                            </table>
+                                </table>
+                                <!-- Tombol Submit di bawah -->
+                                <div class="mt-3">
+                                    <button type="submit" class="btn btn-success btn-block">Update</button>
+                                </div>
+                            </form>
                         </div>
-                        <div>
-                            <button type="submit" class="btn btn-success btn-block">Update</button>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
