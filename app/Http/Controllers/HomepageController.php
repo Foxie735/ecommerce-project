@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slideshow;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class HomepageController extends Controller
 {
@@ -80,10 +82,36 @@ class HomepageController extends Controller
         return view('homepage.categorybyslug', compact('title', 'active', 'category', 'products'));
     }
 
-    public function profile()
+    public function profileEdit(Request $request)
     {
-        $title = "Profile";
+        $title = "Edit Profile";
         $active = "profile";
-        return view('homepage.profile', compact('title', 'active'));
+        $user = auth()->user();
+        return view('homepage.profile', compact('title', 'active', 'user'));
+    }
+
+    public function profileUpdate(Request $request)
+    {
+        $user = auth()->user();
+        $request->validate([
+            'telephone' => 'nullable|string|max:15',
+            'address' => 'nullable|string|max:255',
+            'img_user' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $user->telephone = $request->input('telephone');
+        $user->address = $request->input('address');
+
+        if ($request->hasFile('img_user')) {
+            if ($user->img_user) {
+                Storage::disk('public')->delete($user->img_user);
+            }
+            $file = $request->file('img_user');
+            $path = $file->store('profile_images', 'public');
+            $user->img_user = $path;
+        }
+
+        $user->save();
+        return redirect()->route('profile.edit')->with('success', 'Profile updated successfully!');
     }
 }

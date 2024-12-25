@@ -26,7 +26,8 @@ Route::get('/category', [HomepageController::class, 'category'])->name('home.cat
 Route::get('/productdetail/{slug}', [HomepageController::class, 'productdetail'])->name('home.productdetail');
 Route::get('/category/{slug}', [HomepageController::class, 'categorybyslug'])->name('home.categorybyslug');
 
-Route::get('/profile', [HomepageController::class, 'profile'])->name('home.profile');
+Route::get('profile/edit', [HomepageController::class, 'profileEdit'])->name('profile.edit');
+Route::get('profile/update', [HomepageController::class, 'profileUpdate'])->name('profile.update');
 
 Route::middleware(['auth', 'role:member', 'status:active'])->group(function () {
     Route::resource('cart', CartController::class);

@@ -45,9 +45,8 @@
                                         <th>No</th>
                                         <th>Name</th>
                                         <th>Email</th>
-                                        <th>Telephone</th>
-                                        <th>Address</th>
                                         <th>Status</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,8 +56,6 @@
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $customer->name }}</td>
                                         <td>{{ $customer->email }}</td>
-                                        <td>{{ $customer->telephone }}</td>
-                                        <td>{{ $customer->address }}</td>
                                         <td>{{ $customer->status }}</td>
                                         <td>
                                             <a href="{{ route('customer.edit', $customer->id_user) }}" class="btn btn-sm btn-warning">Edit</a>
