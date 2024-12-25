@@ -79,4 +79,11 @@ class HomepageController extends Controller
 
         return view('homepage.categorybyslug', compact('title', 'active', 'category', 'products'));
     }
+
+    public function profile()
+    {
+        $title = "Profile";
+        $active = "profile";
+        return view('homepage.profile', compact('title', 'active'));
+    }
 }

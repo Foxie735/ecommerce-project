@@ -32,6 +32,9 @@
                     <li class="nav-item {{ $active === 'transactionhistory' ? 'active' : ' ' }}">
                         <a href="/usertransaction" class="nav-link">Transaction</a>
                     </li>
+                    <li class="nav-item {{ $active ==='profile' ? 'active' : ' '}}">
+                        <a class="nav-link" href="{{ route('home.profile') }}">Profile<span class="sr-only">(current)</span></a>
+                    </li>
                 @endif
                 <li class="nav-item {{ $active ==='contact' ? 'active' : ' '}}">
                     <a class="nav-link" href="{{ route('home.contact') }}">Contact</a>
@@ -42,6 +45,9 @@
                 @if(Auth::check() && auth()->user()->role === 'admin')
                     <li class="nav-item">
                         <a href="/admin" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item {{ $active ==='profile' ? 'active' : ' '}}">
+                        <a class="nav-link" href="{{ route('home.profile') }}">Profile<span class="sr-only">(current)</span></a>
                     </li>
                 @endif
                 @if(Auth::check())
