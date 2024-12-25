@@ -29,7 +29,7 @@
                         <form action="{{ route('transaction.find') }}" method="GET">
                             <div class="row">
                                 <div class="col">
-                                    <input type="text" name="key" id="key" class="form-control" 
+                                    <input type="text" name="keyword" id="keyword" class="form-control" 
                                     placeholder="search by sender name, sent name, and payment status or delivery status">
                                 </div>
                                 <div class="col-auto">

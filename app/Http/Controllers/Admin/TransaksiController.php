@@ -26,7 +26,7 @@ class TransaksiController extends Controller
     public function find(Request $request)
     {
         $title = 'Transaction Data';
-        $find = $request->key;
+        $find = $request->keyword;
 
         if($find === 'Not Paid') {
             $find = 'notpaid';
@@ -37,7 +37,7 @@ class TransaksiController extends Controller
         } else if ($find === 'Done') {
             $find = 'done';
         } else {
-            $cari = $request->key;
+            $find = $request->keyword;
         }
 
         $itemorder = Cart::join('order', 'cart.id_cart', '=', 'order.id_cart')
