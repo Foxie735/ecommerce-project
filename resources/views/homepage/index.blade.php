@@ -84,12 +84,13 @@
                     <div>
                         <h5 class="card-header text-center">{{ $category->name_category }}</h5>
                     </div>
-                    <a href="#">
+                    <a href="{{ route('home.categorybyslug', $category->slug_category) }}">
                         <img src="{{ asset($category->img_category) }}" alt="Meals" class="card-img-top fixed-img">
                     </a>
                     <div class="col">
                         <div class="card-body text-center">
-                            <a href="#" class="btn btn-warning">See Category</a>
+                            <a href="{{ route('home.categorybyslug', $category->slug_category) }}" 
+                                class="btn btn-warning">See Category</a>
                         </div>
                     </div>
                 </div>

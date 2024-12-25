@@ -8,17 +8,17 @@ use App\Models\Slideshow;
 
 class HomepageController extends Controller
 {
-    public function index() 
+    public function index()
     {
         $title = "Homepage";
         $active = "home";
         $itemproduct = Product::orderBy('created_at', 'desc')->where('status', 'publish')->limit(6)->get();
         $productpromo = Product::with('ImageProduct')
-                        ->where('status', 'publish')
-                        ->whereNotNull('discount')
-                        ->orderBy('created_at', 'desc')
-                        ->limit(6)
-                        ->get();
+            ->where('status', 'publish')
+            ->whereNotNull('discount')
+            ->orderBy('created_at', 'desc')
+            ->limit(6)
+            ->get();
         $itemcategory = Category::orderBy('name_category', 'asc')->limit(6)->get();
         $itemslide = Slideshow::get();
 
@@ -29,19 +29,19 @@ class HomepageController extends Controller
         // }
         return view('homepage.index', compact('title', 'active', 'itemproduct', 'productpromo', 'itemcategory', 'itemslide'));
     }
-    public function about() 
+    public function about()
     {
         $title = "about Us";
         $active = "about";
         return view('homepage.about', compact('title', 'active'));
     }
-    public function contact() 
+    public function contact()
     {
         $title = "Contact";
         $active = "contact";
         return view('homepage.contact', compact('title', 'active'));
     }
-    public function category() 
+    public function category()
     {
         $title = "Product Category";
         $active = "category";
@@ -52,10 +52,9 @@ class HomepageController extends Controller
 
     public function productdetail($slug)
     {
-        $itemproduct = Product::
-                            where('slug_product', $slug)
-                            ->where('status', 'publish')
-                            ->first();
+        $itemproduct = Product::where('slug_product', $slug)
+            ->where('status', 'publish')
+            ->first();
 
         if ($itemproduct) {
             $title = $itemproduct->name_product;
@@ -65,5 +64,19 @@ class HomepageController extends Controller
         } else {
             return abort(404);
         }
+    }
+
+    public function categorybyslug($slug)
+    {
+        $category = Category::where('slug_category', $slug)->firstOrFail();
+        $products = Product::where('id_category', $category->id_category)
+            ->where('status', 'publish')
+            ->orderBy('created_at', 'desc')
+            ->paginate(12);
+
+        $title = $category->name_category;
+        $active = 'category';
+
+        return view('homepage.categorybyslug', compact('title', 'active', 'category', 'products'));
     }
 }
