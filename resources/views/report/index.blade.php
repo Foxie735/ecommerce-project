@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col col-lg-3 col-md-3"></div>
         <div class="col col-lg-6 col-md-6">
-            <div class="card card-primary card-outline">
+            <div class="card card-info card-outline">
                 <div class="card-header">
                     <h3 class="card-title">Sells Report</h3>
                 </div>
@@ -36,7 +36,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Open Report</button>
+                            <button type="submit" class="btn btn-info btn-block">Open Report</button>
                         </div>
                     </form>
                 </div>

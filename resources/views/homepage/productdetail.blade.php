@@ -34,14 +34,6 @@
                 <div class="col">
                     <div class="card mb-4">
                         <div class="card-header">
-                            Description
-                        </div>
-                        <div class="card-body">
-                            {{ $itemproduct->description_product }}
-                        </div>
-                    </div>
-                    <div class="card mb-4">
-                        <div class="card-header">
                             <div class="card-body">
                                 @if (count($errors) > 0)
                                 @foreach ($errors->all() as $error)
@@ -75,6 +67,14 @@
                                 </p>
                                 @endif
                             </div>
+                        </div>
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            Description
+                        </div>
+                        <div class="card-body">
+                            {{ $itemproduct->description_product }}
                         </div>
                     </div>
                 </div>

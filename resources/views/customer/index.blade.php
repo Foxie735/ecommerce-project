@@ -1,6 +1,19 @@
 @extends('layouts.dashboard')
 
 @section('content')
+
+<style>
+    .co {
+        background-color: #2f4156;
+        color: white;
+    }
+
+    .co:hover {
+        background-color: #1b2530;
+        color: #f7f5f5;
+    }
+</style>
+
     <div class="container-fluid">
         <div class="row">
             <div class="col">
@@ -17,7 +30,7 @@
                                     <input type="text" name="key" id="key" class="form-control" placeholder="Find Customer name, telephone, status, or email">
                                 </div>
                                 <div class="col-auto">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn co">
                                         Search
                                     </button>
                                 </div>
@@ -48,7 +61,7 @@
                                         <td>{{ $customer->address }}</td>
                                         <td>{{ $customer->status }}</td>
                                         <td>
-                                            <a href="{{ route('customer.edit', $customer->id_user) }}" class="btn btn-sm btn-primary">Edit</a>
+                                            <a href="{{ route('customer.edit', $customer->id_user) }}" class="btn btn-sm btn-warning">Edit</a>
                                         </td>
                                     </tr>
                                     @endif

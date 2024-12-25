@@ -1,6 +1,19 @@
 @extends('layouts.dashboard')
 
 @section('content')
+
+<style>
+    .co {
+        background-color: #2f4156;
+        color: white;
+    }
+
+    .co:hover {
+        background-color: #1b2530;
+        color: #f7f5f5;
+    }
+</style>
+
 <div class="container-fluid">
     {{-- Tabel Kategori --}}
     <div class="row">
@@ -9,7 +22,7 @@
                 <div class="card-header">
                     <h4 class="card-title">Product Category</h4>
                     <div class="card-tools">
-                        <a href="{{ route('category.create') }}" class="btn btn-sm btn-primary">New</a>
+                        <a href="{{ route('category.create') }}" class="btn btn-sm btn-info">New</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -19,7 +32,7 @@
                                 <input type="text" name="key" id="key" class="form-control" placeholder="Input Keyword">
                             </div>
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn co">
                                     Search
                                 </button>
                             </div>
@@ -66,7 +79,7 @@
                                     <td>{{ count($item->Product) }}</td>
                                     <td>{{ $item->status }}</td>
                                     <td>
-                                        <a href="{{ route('category.edit', $item->id_category) }}" class="btn btn-sm btn-primary mr-2 mb-2">
+                                        <a href="{{ route('category.edit', $item->id_category) }}" class="btn btn-sm btn-warning mr-2 mb-2">
                                             Edit
                                         </a>
                                         <form action="{{ route('category.destroy', $item->id_category) }}" method="POST" style="display: inline">

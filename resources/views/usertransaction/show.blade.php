@@ -4,9 +4,9 @@
     <div class="container">
         <div class="row">
             <div class="col col-lg-8 col-md-8 mb-2">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Item</h3>
+                <div class="card border border-info">
+                    <div class="card-header bg-info text-light">
+                        <h5 class="card-title">Item</h5>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -62,9 +62,9 @@
                         <a href="{{ route('usertransaction.index') }}" class="btn btn-sm btn-danger">Close</a>
                     </div>
                 </div>
-                <div class="card mt-3">
-                    <div class="card-header">
-                        <h3 class="card-title">Payment Method</h3>
+                <div class="card mt-3 border border-info">
+                    <div class="card-header bg-info text-light">
+                        <h5 class="card-title">Payment Method</h5>
                     </div>
                     <div class="card-body">
                         <style>
@@ -121,7 +121,7 @@
                             </style>
                             <div class="kotak">
                                 <div class="row">
-                                    <div class="col-md-4 mt-3">
+                                    <div class="col-md-4">
                                         <div class="card border-4 payment p-3">
                                             <img src="{{ asset('assets/images/bri.png') }}" alt="BRI">
                                             <p>
@@ -129,7 +129,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="col-md-4 mt-3">
+                                    <div class="col-md-4">
                                         <div class="card border-4 payment p-3">
                                             <img src="{{ asset('assets/images/dana.png') }}" alt="DANA">
                                             <p>
@@ -137,7 +137,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="col-md-4 mt-3">
+                                    <div class="col-md-4">
                                         <div class="card border-4 payment p-3">
                                             <img src="{{ asset('assets/images/gopay.png') }}" alt="Gopay">
                                             <p>
@@ -176,9 +176,9 @@
                 </div>
             </div>
             <div class="col col-lg-4 col-md-4">
-                <div class="card mb-3">
-                    <div class="card-header">
-                        <h3 class="card-title">Shipping Address</h3>
+                <div class="card mb-3 border border-info">
+                    <div class="card-header bg-info text-light">
+                        <h5 class="card-title">Shipping Address</h5>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -186,35 +186,35 @@
                                 <tbody>
                                     <tr>
                                         <td>Name Customer</td>
-                                        <td class="text-right">
+                                        <th class="text-right">
                                             {{ $itemorder->nama_penerima }}
-                                        </td>
+                                        </th>
                                     </tr>
                                     <tr>
                                         <td>Address</td>
-                                        <td class="text-right">
+                                        <th class="text-right">
                                             {{ $itemorder->address }}<br/>
                                             {{ $itemorder->ward }},
                                             {{ $itemorder->subdistrict }}<br/>
                                             {{ $itemorder->city }},
                                             {{ $itemorder->province }} -
                                             {{ $itemorder->postal_code }}
-                                        </td>
+                                        </th>
                                     </tr>
                                     <tr>
                                         <td>Telephone Number</td>
-                                        <td class="text-right">
+                                        <th class="text-right">
                                             {{ $itemorder->telephone }}
-                                        </td>
+                                        </th>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Summary</h3>
+                <div class="card border border-info">
+                    <div class="card-header bg-info text-light">
+                        <h5 class="card-title">Summary</h5>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -222,63 +222,61 @@
                                 <tbody>
                                     <tr>
                                         <td>Total</td>
-                                        <td class="text-right">
+                                        <th class="text-right">
                                             {{ number_format($itemorder->Cart->total + $itemorder->Cart->shipping_cost, 2) }}
-                                        </td>
+                                        </th>
                                     </tr>
                                     <tr>
                                         <td>Subtotal</td>
-                                        <td class="text-right">
+                                        <th class="text-right">
                                             {{ number_format($itemorder->Cart->subtotal, 2) }}
-                                        </td>
+                                        </th>
                                     </tr>
                                     <tr>
                                         <td>Shipping Cost</td>
-                                        <td class="text-right">
+                                        <th class="text-right">
                                             {{ number_format($itemorder->Cart->shipping_cost, 2) }}
-                                        </td>
+                                        </th>
                                     </tr>
                                     <tr>
                                         <td>Expedition</td>
-                                        <td class="text-right">
+                                        <th class="text-right">
                                             {{ $itemorder->Cart->expedition }}
-                                        </td>
+                                        </th>
                                     </tr>
                                     <tr>
                                         <td>Receipt Number</td>
-                                        <td class="text-right">
+                                        <th class="text-right">
                                             {{ number_format($itemorder->Cart->no_receipt, 2) }}
-                                        </td>
+                                        </th>
                                     </tr>
                                     <tr>
                                         <td>Payment Status</td>
-                                        <td class="text-right">
+                                        <th class="text-right">
                                             @if($itemorder->Cart->payment_status === 'notpaid')
                                                 Not paid
                                             @else
                                                 Paid
                                             @endif
-                                        </td>
+                                        </th>
                                     </tr>
                                     <tr>
                                         <td>Delivery Status</td>
-                                        <td class="text-right">
+                                        <th class="text-right">
                                             @if($itemorder->Cart->delivery_status === 'notdone')
                                                 Not done
                                             @else
                                                 Done
                                             @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <a href="https://api.whatsapp.com/send?phone=6281381721708" class="btn btn-success">
-                                                Confirm Order
-                                            </a>
-                                        </td>
+                                        </th>
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                        <div>
+                            <a href="https://api.whatsapp.com/send?phone=6281381721708" class="btn btn-success btn-block">
+                                Confirm Order
+                            </a>
                         </div>
                     </div>
                 </div>

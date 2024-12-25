@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
+        <div class="row mb-4">
             <div class="col">
-                <div class="card">
-                    <div class="card-header">
-                        Transaction Data
+                <div class="card border border-info">
+                    <div class="card-header bg-info text-light">
+                        <h6>Transaction Data</h6>
                     </div>
                     <div class="card-body">
                         @if (count($errors) > 0)
