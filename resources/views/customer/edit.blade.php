@@ -43,14 +43,6 @@
                                     <td>{{ $itemcustomer->email }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Telephone</td>
-                                    <td>{{ $itemcustomer->telephone }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Address</td>
-                                    <td>{{ $itemcustomer->address }}</td>
-                                </tr>
-                                <tr>
                                     <td>Status</td>
                                     <td>
                                         <form action="#" class="form-inline">
